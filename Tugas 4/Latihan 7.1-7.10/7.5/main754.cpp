@@ -48,9 +48,5 @@ int main(){
         cout << "Bukan bulan yang benar" << endl;
         break;
     }
-
-
-
-
     return 0;
 }

@@ -4,16 +4,13 @@ using namespace std;
 
 int main() {
     int hh, mm, ss;
-
     cout << "Masukkan jam (0-23): ";
     cin >> hh;
     cout << "Masukkan menit (0-59): ";
     cin >> mm;
     cout << "Masukkan detik (0-59): ";
     cin >> ss;
-
     ss++;
-
     if (ss == 60) { 
         ss = 0;
         mm++;
@@ -27,7 +24,6 @@ int main() {
             }
         }
     }
-
     cout << "Jam yang baru: ";
     cout << (hh < 10 ? "0" : "") << hh << ":"
          << (mm < 10 ? "0" : "") << mm << ":"

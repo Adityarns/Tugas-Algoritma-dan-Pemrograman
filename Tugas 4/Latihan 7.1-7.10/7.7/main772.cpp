@@ -7,12 +7,9 @@ int main() {
         int mm; 
         int ss; 
     };
-
     Jam J1, J2, J3;
-
     cout << "Masukkan jam awal (hh mm ss): ";
     cin >> J1.hh >> J1.mm >> J1.ss;
-
     cout << "Masukkan jam akhir (hh mm ss): ";
     cin >> J2.hh >> J2.mm >> J2.ss;
 

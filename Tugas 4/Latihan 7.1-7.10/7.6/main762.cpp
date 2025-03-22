@@ -3,7 +3,7 @@ using namespace std;
 
 int main(){
     int A, B;
-    cout << "-----Menentukan bilangan terbesar-----";
+    cout << "-----Menentukan bilangan terbesar-----" << endl;
     cout << "Masukkan A: ";
     cin >> A;
     cout << "Masukkan B: ";

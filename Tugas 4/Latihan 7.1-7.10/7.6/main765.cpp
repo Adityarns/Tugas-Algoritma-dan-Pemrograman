@@ -9,7 +9,7 @@ int main(){
     cout << "1. Hitung luas" << endl;
     cout << "2. Hitung keliling" << endl;
     cout << "3. Hitung panjang diagonal" << endl;
-    cout << "4. Keluar diagonal" << endl;
+    cout << "4. Keluar program" << endl;
     cout << "Masukkan pilihan anda (1/2/3/4): ";
     cin >> nomorMenu;
 

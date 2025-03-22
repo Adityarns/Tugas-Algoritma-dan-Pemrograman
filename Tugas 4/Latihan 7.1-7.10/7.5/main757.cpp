@@ -44,7 +44,5 @@ int main(){
         cout << "Pilihan tidak valid, silakan pilih kembali. \n" << endl;
         break;
     }
-
-
     return 0;
 }

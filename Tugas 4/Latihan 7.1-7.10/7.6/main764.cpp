@@ -5,7 +5,6 @@ int main(){
     int nomorBulan;
     cout << "Masukkan nomor bulan: ";
     cin >> nomorBulan;
-
     switch (nomorBulan){
     case 1:
         cout << "Januari" << endl;
@@ -43,7 +42,6 @@ int main(){
     case 12:
         cout << "Desember" << endl;
         break;
-    
     default:
         cout << "Bukan bulan yang benar" << endl;
         break;

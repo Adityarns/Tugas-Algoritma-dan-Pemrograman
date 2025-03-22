@@ -18,7 +18,7 @@ int main() {
             JumlahHari = 30;
             break;
         case 2:
-            if ((tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0)) {
+            if ((tahun % 4 == 0 && tahun % 100 != 0) || (tahun % 400 == 0)){
                 // Tahun kabisat
                 JumlahHari = 29;
             } else {
