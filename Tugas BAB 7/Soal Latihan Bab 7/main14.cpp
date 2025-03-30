@@ -1,5 +1,5 @@
 #include <iostream>
-#include <iomanip>
+#include <iomanip> // Untuk manipulasi output
 using namespace std;
 
 double hitungHargaTiket(int tahunLahir, int tahunBerangkat, double hargaNormal) {
@@ -17,6 +17,7 @@ int main() {
     cout << "Masukkan tahun keberangkatan: ";
     cin >> tahunBerangkat;
 
+    // Validasi input
     if (tahunLahir > tahunBerangkat) {
         cout << "Error: Tahun keberangkatan tidak boleh lebih kecil dari tahun lahir." << endl;
         return 1;
@@ -24,6 +25,7 @@ int main() {
 
     double hargaTiket = hitungHargaTiket(tahunLahir, tahunBerangkat, hargaNormal);
 
+    // Format output dengan 2 digit desimal dan pemisah ribuan
     cout << fixed << setprecision(2);
     cout << "Harga tiket yang harus dibayar: Rp " << hargaTiket << endl;
 
