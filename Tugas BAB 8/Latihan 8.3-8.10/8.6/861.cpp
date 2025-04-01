@@ -1,15 +1,20 @@
 #include <iostream>
+
 using namespace std;
 
-int main(){
-    int x, s;
-    s = 0;
+int main() {
+    int x;
+    double S = 0.0; 
+    cout << "Masukkan nilai x: ";
+    cin >> x; 
 
-    while (x != -1){
-        s = s+1/x;
+    while (x != -1) {
+        S += 1.0 / x; 
         cout << "Masukkan nilai x: ";
-        cin >> x;
+        cin >> x; 
     }
-    cout << "Nilai:" << s << endl; 
+
+    cout << S << endl; 
+
     return 0;
 }
