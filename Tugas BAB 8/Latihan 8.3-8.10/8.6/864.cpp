@@ -4,16 +4,17 @@ using namespace std;
 int main (){
     int nomorMenu;
 
-    cout << "   Menu    " <<  endl;
-    cout << "1. Baca data" << endl;
-    cout << "2. Cetak data" << endl;
-    cout << "3. Ubah data" << endl;
-    cout << "4. Hapus data" << endl;
-    cout << "5. Keluar program" << endl;
 
-    do{
+    while(nomorMenu != 5){
+        cout << "   Menu    " <<  endl;
+        cout << "1. Baca data" << endl;
+        cout << "2. Cetak data" << endl;
+        cout << "3. Ubah data" << endl;
+        cout << "4. Hapus data" << endl;
+        cout << "5. Keluar program" << endl;
         cout << "Masukkan Pilihan(1/2/3/4/5): ";
         cin >> nomorMenu;
+
         switch (nomorMenu)
         {
         case 1:
@@ -31,13 +32,10 @@ int main (){
         case 5:
             cout << "Keluar Program" << endl;
             break;
-        
         default:
             cout << "Nomor pilihan anda salah" << endl;
             break;
-        }
-        break;
-    } while(nomorMenu = 5);
-
+        }  
+    } 
     return 0;
 }

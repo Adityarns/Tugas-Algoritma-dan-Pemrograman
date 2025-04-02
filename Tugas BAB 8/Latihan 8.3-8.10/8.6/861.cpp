@@ -2,7 +2,8 @@
 
 using namespace std;
 
-int main() {
+int main() 
+{
     int x;
     double S = 0.0; 
     cout << "Masukkan nilai x: ";
