@@ -3,8 +3,6 @@ using namespace std;
 
 int main (){
     int nomorMenu;
-
-
     while(nomorMenu != 5){
         cout << "   Menu    " <<  endl;
         cout << "1. Baca data" << endl;

@@ -7,7 +7,5 @@ int main(){
         cout << i << " ";
     }
     cout << "Go!";
-
-
     return 0;
 }

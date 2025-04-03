@@ -3,14 +3,12 @@ using namespace std;
 
 int main (){
     int nomorMenu;
-
     cout << "   Menu    " <<  endl;
     cout << "1. Baca data" << endl;
     cout << "2. Cetak data" << endl;
     cout << "3. Ubah data" << endl;
     cout << "4. Hapus data" << endl;
     cout << "5. Keluar program" << endl;
-
     do{
         cout << "Masukkan Pilihan(1/2/3/4/5): ";
         cin >> nomorMenu;
@@ -38,6 +36,5 @@ int main (){
         }
         break;
     } while(nomorMenu = 5);
-
     return 0;
 }

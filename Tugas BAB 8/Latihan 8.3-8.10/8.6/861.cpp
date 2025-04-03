@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 int main() 
@@ -14,8 +13,6 @@ int main()
         cout << "Masukkan nilai x: ";
         cin >> x; 
     }
-
     cout << S << endl; 
-
     return 0;
 }

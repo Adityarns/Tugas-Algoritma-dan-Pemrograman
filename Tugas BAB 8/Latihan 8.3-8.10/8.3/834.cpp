@@ -13,7 +13,5 @@ int main(){
     }
     rerata = sum/n;
     cout << "Nilai rata-rata: " << rerata << endl;
-
-
     return 0;
 }

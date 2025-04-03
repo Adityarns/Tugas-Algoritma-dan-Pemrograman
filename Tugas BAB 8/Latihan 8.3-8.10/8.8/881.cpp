@@ -16,7 +16,7 @@ int main(){
         sum += x;
         i += 1;
     }
-    rerata = (float)sum/N;
+    rerata = (float)sum/N;  
     cout << "Rata-rata: " << rerata << endl;
     Fin.close();
     return 0;

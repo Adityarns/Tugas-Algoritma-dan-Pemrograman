@@ -7,11 +7,8 @@ int main(){
         cout << i << " ";
 
         for(p = 1; p <= 1000; p++){
-
         }
     }
     cout << "Go!";
-
-
     return 0;
 }

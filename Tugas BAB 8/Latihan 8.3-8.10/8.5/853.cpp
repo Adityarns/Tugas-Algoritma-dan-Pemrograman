@@ -9,7 +9,7 @@ int main(){
     i = 1;
     do {
         sum += i;
-        i++;
+        i += 1;
     } while(i <= n);
     cout << "Hasil: " << sum << endl;
     return 0;

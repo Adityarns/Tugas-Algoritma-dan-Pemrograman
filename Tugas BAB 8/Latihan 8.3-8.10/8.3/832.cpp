@@ -9,7 +9,5 @@ int main(){
     for(i = 1; i<=n; i++){
         cout << i;
     }
-
-
     return 0;
 }

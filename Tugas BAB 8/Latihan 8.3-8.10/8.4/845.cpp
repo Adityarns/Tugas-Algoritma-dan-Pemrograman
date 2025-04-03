@@ -6,7 +6,7 @@ int main(){
     i = 100;
     while (i >= 0){
         cout << i << " ";
-        i--;
+        i -= 1;
     }
     cout << "Go!!!" << endl;
     return 0;

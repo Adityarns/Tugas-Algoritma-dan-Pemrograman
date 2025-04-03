@@ -9,7 +9,6 @@ int main (){
     double lembur, upahTotal;
     string nama;
     char gol, jawab;
-
     do{
         cout << "Masukan nama: ";
         cin >> nama;
@@ -34,7 +33,6 @@ int main (){
         default:
             break;
         }
-
         if(jjk <= jamNormal){
             upahTotal = jjk * upahPerjam;
         }
@@ -43,7 +41,7 @@ int main (){
             upahTotal = jamNormal * upahPerjam + lembur * UpahLembur;
         }
         cout << "Upah total: " << upahTotal << endl;
-        cout << "Ulani untuk karyawan yang lain(y/t): ";
+        cout << "Ulangi untuk karyawan yang lain(y/t): ";
         cin >> jawab;
     } while( jawab != 't');
     return 0;

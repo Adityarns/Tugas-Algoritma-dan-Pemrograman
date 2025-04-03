@@ -4,7 +4,6 @@ using namespace std;
 int main (){
     int nomorMenu;
     bool stop;
-
     stop = false;
     while(not stop){
         cout << "   Menu    " <<  endl;
@@ -15,7 +14,6 @@ int main (){
         cout << "5. Keluar program" << endl;
         cout << "Masukkan Pilihan(1/2/3/4/5): ";
         cin >> nomorMenu;
-
         switch (nomorMenu)
         {
         case 1:

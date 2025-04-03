@@ -9,7 +9,7 @@ int main(){
     i = 1;
     while (i <= n){
         sum += i;
-        i++;
+        i+=1;
     }
     rerata = sum/n;
     cout << "Hasil: " << rerata << endl;
