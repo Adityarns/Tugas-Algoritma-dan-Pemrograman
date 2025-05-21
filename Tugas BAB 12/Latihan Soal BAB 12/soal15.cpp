@@ -21,14 +21,10 @@ void cetakArray(int A[], int N) {
 int main() {
     int A[] = {1, 2, 3, 4, 5};
     int N = sizeof(A) / sizeof(A[0]);
-
     cout << "Sebelum digeser: ";
     cetakArray(A, N);
-
     geserKiriSirkuler(A, N);
-
     cout << "Setelah digeser sirkuler ke kiri: ";
     cetakArray(A, N);
-
     return 0;
 }

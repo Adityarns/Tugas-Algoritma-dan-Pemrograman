@@ -7,7 +7,7 @@ void SalinString(char *s1, char *s2) {
         s2[i] = s1[i];
         i+=1;
     }
-    s2[i] = '\0'; // Menambahkan karakter null di akhir string
+    s2[i] = '\0'; 
 }
 
 int main() {

@@ -12,7 +12,6 @@ bool larikSama(int A[], int B[], int N) {
             sama = false;
         }
     }
-
     return sama;
 }
 

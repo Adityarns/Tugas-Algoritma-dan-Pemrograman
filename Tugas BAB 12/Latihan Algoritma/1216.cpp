@@ -7,7 +7,6 @@ int A[Nmmax];
 int N;
 int imax;
 
-
 void BacaLarikVersi1(int A[], int N){
     for (int i = 0; i < N; i++) {
         cout << "Masukkan elemen array: ";

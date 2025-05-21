@@ -25,7 +25,7 @@ int main() {
     for (int i = 0; i < N; i++) {
         cout << "Elemen ke-" << i << " dari larik A: " << A[i] << endl;
     }
-
+    cout << endl;
     for (int i = 0; i < N; i++) {
         cout << "Elemen ke-" << i << " dari larik B: " << B[i] << endl;    }        
     return 0;

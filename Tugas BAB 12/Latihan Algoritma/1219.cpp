@@ -2,7 +2,7 @@
 using namespace std;
 
 void CariMinVersi2(int A[], int N, int &idxMin){
-    idxMin = 1;
+    idxMin = 0;
     for (int i = 1; i < N; i++) {
         if (A[i] < A[idxMin]) {
             idxMin = i;

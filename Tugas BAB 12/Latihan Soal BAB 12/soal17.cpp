@@ -34,7 +34,6 @@ void cetakTertinggiTerendah(Mahasiswa mhs[], int N) {
 
     cout << "\nMahasiswa dengan IPK TERTINGGI:\n";
     cout << mhs[idxTinggi].nama << " (NIM: " << mhs[idxTinggi].NIM << ", IPK: " << mhs[idxTinggi].IPK << ")\n";
-
     cout << "\nMahasiswa dengan IPK TERENDAH:\n";
     cout << mhs[idxRendah].nama << " (NIM: " << mhs[idxRendah].NIM << ", IPK: " << mhs[idxRendah].IPK << ")\n";
 }
@@ -49,9 +48,7 @@ int main() {
     };
 
     int N = sizeof(daftar) / sizeof(daftar[0]);
-
     cetakMahasiswaIPKDiAtas(daftar, N, 2.0);
     cetakTertinggiTerendah(daftar, N);
-
     return 0;
 }

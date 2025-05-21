@@ -2,7 +2,7 @@
 using namespace std;
 
 int Maxlarik3(int A[], int N, int &idxMaks){
-    idxMaks = 1;
+    idxMaks = 0;
     for (int i = 1; i < N; i++) {
         if (A[i] > A[idxMaks]) {
             idxMaks = i;

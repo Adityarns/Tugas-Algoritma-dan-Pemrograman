@@ -10,7 +10,7 @@ int apakahSama(char *s1, char *s2) {
        return 0; 
     }
     else{
-        i = 1;
+        i = 0;
         sama = 1;
         while (s1[i] != '\0' && sama == 1) {
             if (s1[i] == s2[i]) {
@@ -21,9 +21,7 @@ int apakahSama(char *s1, char *s2) {
             }
         }
     }
-    i++;
-    
-    return (s1[i] == s2[i]); 
+    return sama; 
 }
 
 int main() {
