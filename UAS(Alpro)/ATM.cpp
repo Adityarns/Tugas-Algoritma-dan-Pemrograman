@@ -10,8 +10,6 @@ struct ATM {
     int topUp;
 };
 
-void showMenuAtm();
-
 void showMenuAtm() {
     ATM userAtm; // Membuat objek ATM
     int userInput2;

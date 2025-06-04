@@ -1,4 +1,6 @@
 #include <iostream>
+#include "ATM.cpp"
+
 using namespace std;
 
 

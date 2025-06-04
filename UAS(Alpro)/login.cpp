@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "ATM.cpp"
 #include "calculator.cpp"
 #include "game.cpp"
 #include "Ecommerce.cpp"
@@ -67,7 +66,7 @@ void showMenuUtama(){
                 showMenuEcommerce();
                 break;
             case 4:
-                // showMenuGame();
+                showMenuGame();
                 break;
             case 5:
                 cout << "Terima kasih telah menggunakan aplikasi ini!" << endl;
