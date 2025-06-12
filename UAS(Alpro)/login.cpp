@@ -4,11 +4,10 @@
 #include "calculator.cpp"
 #include "game.cpp"
 #include "Ecommerce.cpp"
+#include "global.hpp"
 
 using namespace std;
 
-void Start();
-void showMenuUtama();
 void buatAkun();
 void inputlogin();
 void simpanDataAkun();
@@ -79,14 +78,16 @@ void showMenuUtama(){
 }
 
 // Batas maksimum akun yang bisa didaftarkan
-const int maxUser = 100; 
+// const int maxUser = 100; 
 
 // Array untuk menyimpan usernames dan sandi
 string usernames[maxUser];
 string sandi[maxUser];
+ATM dataATM[maxUser];
 
 // Variabel untuk melacak jumlah akun yang sudah terdaftar
-int akunTerdaftar = 0; 
+int akunTerdaftar = 0;
+int akunAktif = 0; 
 
 void inputlogin (){
     int i = 0;
@@ -104,6 +105,7 @@ void inputlogin (){
             if(usernames[i] == inputNama && sandi[i] == inputSandi){
                 cout << "Login sukses.." << endl;
                 loginSukses = true;
+                akunAktif = i;
                 break;
             }
         }
@@ -146,6 +148,7 @@ void buatAkun(){
     // Tambahkan akun baru ke array
     usernames[akunTerdaftar] = newUsername;
     sandi[akunTerdaftar] = newPassword;
+    dataATM[akunTerdaftar].saldo = 10000;
     akunTerdaftar++; // Tingkatkan jumlah akun yang terdaftar
     simpanDataAkun();
     
@@ -156,28 +159,30 @@ void simpanDataAkun() {
     ofstream file("akun.txt");
     if (file.is_open()) {
         for (int i = 0; i < akunTerdaftar; ++i) {
-            file << usernames[i] << " " << sandi[i] << endl;
+            file << usernames[i] << " " << sandi[i] << " " << dataATM[i].saldo << endl;
         }
         file.close();
-        
     } else {
-        cout << "Gagal menyimpan data akun ke file." << endl;
+        cout << "Gagal menyimpan data akun ke file.\n";
     }
 }
+
 
 void muatDataAkun() {
     ifstream file("akun.txt");
     string uname, pass;
+    int saldo;
     akunTerdaftar = 0;
     if (file.is_open()) {
-        while (file >> uname >> pass && akunTerdaftar < maxUser) {
+        while (file >> uname >> pass >> saldo && akunTerdaftar < maxUser) {
             usernames[akunTerdaftar] = uname;
             sandi[akunTerdaftar] = pass;
+            dataATM[akunTerdaftar].saldo = saldo;
             akunTerdaftar++;
         }
         file.close();
     } else {
-        // Jika file tidak ditemukan, diasumsikan pertama kali jalan
-        cout << "(Info: File akun.txt belum tersedia. Akan dibuat setelah akun ditambahkan.)" << endl;
+        cout << "(Info: File akun.txt belum tersedia. Akan dibuat setelah akun ditambahkan.)\n";
     }
 }
+
