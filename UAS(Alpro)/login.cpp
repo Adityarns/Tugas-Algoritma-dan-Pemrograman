@@ -148,7 +148,7 @@ void buatAkun(){
     // Tambahkan akun baru ke array
     usernames[akunTerdaftar] = newUsername;
     sandi[akunTerdaftar] = newPassword;
-    dataATM[akunTerdaftar].saldo = 10000;
+    dataATM[akunTerdaftar].saldo = 0;
     akunTerdaftar++; // Tingkatkan jumlah akun yang terdaftar
     simpanDataAkun();
     
@@ -166,7 +166,6 @@ void simpanDataAkun() {
         cout << "Gagal menyimpan data akun ke file.\n";
     }
 }
-
 
 void muatDataAkun() {
     ifstream file("akun.txt");
