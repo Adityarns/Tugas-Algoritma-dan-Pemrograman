@@ -130,25 +130,23 @@ public:
     }
 
     void displayMenuFastFood() {
-        cout << "\n---------- MENU FAST FOOD ----------\n";
-        cout << "Saldo anda saat ini\t : Rp." << dataATM[akunAktif].saldo << endl;
-        cout << "------------------------------------" << endl;
+        cout << "\n========= MENU FAST FOOD =========\n";
         cout << "-1. mengurutkan berdasarkan harga" << endl;
-        cout << "------------------------------------" << endl;
+        cout << "====================================" << endl;
         for (int i = 0; i < foodCount; i++) {
             cout << (i + 1) << ". " << foodMenu[i].name << "\t : Rp." << foodMenu[i].price << endl;
         }
         for (int i = 0; i < drinkCount; i++) {
             cout << (foodCount + i + 1) << ". " << drinkMenu[i].name << "\t : Rp." << drinkMenu[i].price << endl;
         }
-        cout << "------------------------------------" << endl;
+        cout << "=====================================" << endl;
     }
     
     MenuItem getItemByIndex(int index) {
         if (index >= 1 && index <= foodCount) {
             return foodMenu[index - 1];
         } else if (index > foodCount && index <= foodCount + drinkCount) {
-            return drinkMenu[index - foodCount - 1 + 1];
+            return drinkMenu[index - foodCount - 1 ];
         }
         return MenuItem("Invalid", 0);
     }
@@ -187,40 +185,40 @@ class MenuJajanan : public templateMenu{
     
     void tambahkanMakananJajanan(string foodNames[], int foodPrices[]){
         for (int i = 0; i < foodCount; i++) { // No need to set foodCount again
-           foodMenu[i] = MenuItem(foodNames[i], foodPrices[i]);
-           originalFoodMenu[i] = foodMenu[i];
-       }
-   }
-   
+            foodMenu[i] = MenuItem(foodNames[i], foodPrices[i]);
+            originalFoodMenu[i] = foodMenu[i];
+        }
+    }
+    
     void tambahkanMinumanJajanan(string drinkNames[], int drinkPrices[]){
         for (int i = 0; i < drinkCount; i++) { // No need to set drinkCount again
-           drinkMenu[i] = MenuItem(drinkNames[i], drinkPrices[i]);
-           originalDrinkMenu[i] = drinkMenu[i];
+            drinkMenu[i] = MenuItem(drinkNames[i], drinkPrices[i]);
+            originalDrinkMenu[i] = drinkMenu[i];
         }
     }
     
     void displayMenuJajanan() {
-        cout << "\n---------- MENU JAJANAN ----------\n";
+        cout << "\n========= MENU JAJANAN =========\n";
         cout << "Saldo anda saat ini\t : Rp." << dataATM[akunAktif].saldo << endl;
-        cout << "------------------------------------" << endl;
+        cout << "==================================" << endl;
         cout << "-1. mengurutkan berdasarkan harga" << endl;
-        cout << "------------------------------------" << endl;
+        cout << "==================================" << endl;
         for (int i = 0; i < foodCount; i++) {
             cout << (i + 1) << ". " << foodMenu[i].name << "\t : Rp." << foodMenu[i].price << endl;
         }
         for (int i = 0; i < drinkCount; i++) {
             cout << (foodCount + i + 1) << ". " << drinkMenu[i].name << "\t : Rp." << drinkMenu[i].price << endl;
         }
-        cout << "------------------------------------" << endl;
+        cout << "==================================" << endl;
     }
-
+    
     MenuItem getItemByIndex(int index) {
         if (index >= 1 && index <= foodCount) {
             return foodMenu[index - 1];
         } else if (index > foodCount && index <= foodCount + drinkCount) {
-            return drinkMenu[index - foodCount - 1 + 1];
+            return drinkMenu[index - foodCount - 1];
         }
-    return MenuItem("Invalid", 0);
+        return MenuItem("Invalid", 0);
     }
 };
 
@@ -231,6 +229,11 @@ void showMenuEcommerce(){
     MenuFastFood menu1;
     MenuJajanan menu2;
     MenuItem pesanan;
+    
+    // Array untuk menyimpan daftar pesanan
+    MenuItem daftarPesanan[100];
+    int jumlahPesanan = 0;
+    
     do {
         cout << "\n--- GO-FOOD ---" << endl;
         cout << "1. Fast Food " << endl;
@@ -238,97 +241,139 @@ void showMenuEcommerce(){
         cout << "3. Kembali ke Menu Utama" << endl;
         cout << "Jawaban: ";
         cin >> userInput5;
+
         switch (userInput5) {
             case 1:
-                pilihItem = -2; // Reset di awal
-                menu1.displayMenuFastFood();
-                while (pilihItem != 0)
-                {
-                    cout << "Pilih nomor pesanan (0 untuk batal): ";
-                    cin >> pilihItem;
+            pilihItem = -2;
+            menu1.displayMenuFastFood();
+            while (pilihItem != 0) {
+                cout << "Pilih nomor pesanan (0 untuk batal): ";
+                cin >> pilihItem;
                 
-                    if (pilihItem == -1) {
-                        int sortChoice;
-                        cout << "1. Urutkan harga dari termurah" << endl;
-                        cout << "2. Urutkan harga dari termahal" << endl;
-                        cout << "Pilihan: ";
-                        cin >> sortChoice;
+                if (pilihItem == -1) {
+                    int sortChoice;
+                    cout << "1. Urutkan harga dari termurah" << endl;
+                    cout << "2. Urutkan harga dari termahal" << endl;
+                    cout << "Pilihan: ";
+                    cin >> sortChoice;
                     
-                        if (sortChoice == 1) {
-                            menu1.sortByPrice(); // default ascending
-                            menu1.displayMenuFastFood();
-                        } else if (sortChoice == 2) {
-                            menu1.sortByPrice(false);    // descending
-                            menu1.displayMenuFastFood();
+                    if (sortChoice == 1) {
+                        menu1.sortByPrice(); // ascending
+                        menu1.displayMenuFastFood();
+                    } else if (sortChoice == 2) {
+                        menu1.sortByPrice(false); // descending
+                        menu1.displayMenuFastFood();
                         } else {
                             cout << "Pilihan tidak valid untuk pengurutan." << endl;
                         }
-                    
-                        pilihItem = -2; // supaya tidak dianggap pesanan
+                        pilihItem = -2;
                         continue;
                     }
-                
+                    
                     if (pilihItem > 0) {
                         pesanan = menu1.getItemByIndex(pilihItem);
                         if (pesanan.name != "Invalid") {
                             cout << "Pesanan: " << pesanan.name << " - Rp" << pesanan.price << endl;
                             total += pesanan.price;
                             cout << "Total Harga Sementara: Rp" << total << endl;
+                            
+                            // Simpan ke daftar pesanan
+                            daftarPesanan[jumlahPesanan] = pesanan;
+                            jumlahPesanan++;
                         } else {
                             cout << "Nomor menu tidak valid." << endl;
                         }
                     }
                 }
-                
                 break;
                 
-            case 2:
-                pilihItem = -2; // Reset di awal
-                while (pilihItem != 0)
-                {
-                    menu2.displayMenuJajanan();
+                case 2:
+                pilihItem = -2;
+                menu2.displayMenuJajanan();
+                while (pilihItem != 0) {
                     cout << "\nKetik -1 jika ingin mengurutkan makanan berdasarkan harga" << endl;
                     cout << "Pilih nomor menu yang ingin dipesan (0 untuk batal): ";
                     cin >> pilihItem;
-                
+                    
                     if (pilihItem == -1) {
                         int sortChoice;
                         cout << "1. Urutkan harga dari termurah" << endl;
                         cout << "2. Urutkan harga dari termahal" << endl;
                         cout << "Pilihan: ";
                         cin >> sortChoice;
-                    
+                        
                         if (sortChoice == 1) {
-                            menu2.sortByPrice(); // default ascending
+                            menu2.sortByPrice(); // ascending
+                            menu2.displayMenuJajanan();
                         } else if (sortChoice == 2) {
-                            menu2.sortByPrice(false);    // descending
+                            menu2.sortByPrice(false); // descending
+                            menu2.displayMenuJajanan();
                         } else {
                             cout << "Pilihan tidak valid untuk pengurutan." << endl;
                         }
-                    
-                        pilihItem = -2; // supaya tidak dianggap pesanan
+                        pilihItem = -2;
                         continue;
                     }
+                    
                     if (pilihItem > 0) {
                         pesanan = menu2.getItemByIndex(pilihItem);
                         if (pesanan.name != "Invalid") {
                             cout << "Pesanan: " << pesanan.name << " - Rp" << pesanan.price << endl;
                             total += pesanan.price;
                             cout << "Total Harga Sementara: Rp" << total << endl;
+                            
+                            // Simpan ke daftar pesanan
+                            daftarPesanan[jumlahPesanan] = pesanan;
+                            jumlahPesanan++;
                         } else {
                             cout << "Nomor menu tidak valid." << endl;
                         }
                     }
                 }
-            case 3:
                 break;
-
-            default:
+                
+                case 3:
+                break;
+                
+                default:
                 cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
                 break;
-        }
+            }
 
-    } while (userInput5 != 3); // ulang terus sampai user pilih keluar
+        } while (userInput5 != 3); // Ulang terus sampai keluar
+        
+        // Setelah keluar, tampilkan daftar pesanan
+        if (jumlahPesanan > 0) {
+            string konfirmasiPembayaran;
+            cout << "\n========= Daftar Pesanan Anda =========" << endl;
+            for (int i = 0; i < jumlahPesanan; i++) {
+                cout << (i + 1) << ". " << daftarPesanan[i].name << " \t- Rp" << daftarPesanan[i].price << endl;
+            }
+            cout << "=======================================" << endl;
+            cout << "Total Pembayaran\t: Rp" << total << endl;
+            cout << "Saldo anda saat ini\t: Rp." << dataATM[akunAktif].saldo << endl;
+            cout << "Pesan Sekarang (ya/tidak)\t: ";
+            cin >> konfirmasiPembayaran;
+            cout << "=======================================" << endl;
+            if (konfirmasiPembayaran == "ya" || konfirmasiPembayaran == "YA"){
+                if (dataATM[akunAktif].saldo >= total){
+                    dataATM[akunAktif].saldo -= total;
+                    cout << "Saldo anda saat ini\t : Rp." << dataATM[akunAktif].saldo << endl;
+                    cout << "Kurir akan segera meengantarkan pesanan, mohon tunggu beberapa meenit ya!!!"<< endl;
+                    cout << "=======================================" << endl;
+                    simpanDataAkun();
+                }
+                else{
+                    cout << "Saldo anda tidak cukup..." << endl;
+                }
+            }
+            else {
+                cout << "Silahkan datang kembali..." << endl;
+            }
+        } 
+        else {
+            cout << "\nAnda belum memesan apapun.\n";
+        }
 }
 
 
