@@ -29,7 +29,7 @@ void Start() {
     do {
         cout << "\n==============================\n";
         cout << "|        MENU UTAMA          |\n";
-        cout << "|----------------------------|\n";
+        cout << "|============================|\n";
         cout << "|  1. Login                  |\n";
         cout << "|  2. Buat Akun Baru         |\n";
         cout << "|  3. Keluar                 |\n";
@@ -54,7 +54,7 @@ void showMenuUtama() {
     do {
         cout << "\n==============================\n";
         cout << "|         FITUR APP          |\n";
-        cout << "|----------------------------|\n";
+        cout << "|============================|\n";
         cout << "| 1. ATM                     |\n";
         cout << "| 2. Kalkulator              |\n";
         cout << "| 3. GO-Food                 |\n";

@@ -85,7 +85,7 @@ public:
         drinkCount = 10;
 
         string foodNames[] = {
-            "Cheeseburger\t", "Chicken Burger", "Double Beef Burger",
+            "Cheeseburger", "Chicken Burger", "Pizza\t",
             "Crispy Chicken", "Spicy Chicken", "Chicken Nuggets",
             "French Fries (S)", "French Fries (M)", "French Fries (L)",
             "Chicken Wings", "Beef Rice Bowl", "Chicken Rice Bowl"
@@ -130,16 +130,18 @@ public:
     }
 
     void displayMenuFastFood() {
-        cout << "\n========= MENU FAST FOOD =========\n";
-        cout << "-1. mengurutkan berdasarkan harga" << endl;
-        cout << "====================================" << endl;
+        cout << "\n========================================" << endl;
+        cout << "|           MENU FAST FOOD             |" << endl;
+        cout << "|======================================|" << endl;
+        cout << "| -1. Urutkan berdasarkan harga        |" << endl;
+        cout << "|======================================|" << endl;
         for (int i = 0; i < foodCount; i++) {
-            cout << (i + 1) << ". " << foodMenu[i].name << "\t : Rp." << foodMenu[i].price << endl;
+            cout << "| " << (i + 1) << ". " << foodMenu[i].name << "\t : Rp." << foodMenu[i].price << endl;
         }
         for (int i = 0; i < drinkCount; i++) {
-            cout << (foodCount + i + 1) << ". " << drinkMenu[i].name << "\t : Rp." << drinkMenu[i].price << endl;
+            cout << "| " << (foodCount + i + 1) << ". " << drinkMenu[i].name << "\t : Rp." << drinkMenu[i].price << endl;
         }
-        cout << "=====================================" << endl;
+        cout << "=======================================" << endl;
     }
     
     MenuItem getItemByIndex(int index) {
@@ -160,7 +162,7 @@ class MenuJajanan : public templateMenu{
         drinkCount = 6;
         
         string foodNames[] = {
-            "Basreng", "Cimol Bojot", "Tahu Gejrot",
+            "Basreng", "Cimol", "Tahu",
             "Cireng", "Takoyaki", "Bakso",
         };
         
@@ -198,18 +200,18 @@ class MenuJajanan : public templateMenu{
     }
     
     void displayMenuJajanan() {
-        cout << "\n========= MENU JAJANAN =========\n";
-        cout << "Saldo anda saat ini\t : Rp." << dataATM[akunAktif].saldo << endl;
-        cout << "==================================" << endl;
-        cout << "-1. mengurutkan berdasarkan harga" << endl;
-        cout << "==================================" << endl;
+        cout << "\n========================================" << endl;
+        cout << "|             MENU JAJANAN             |" << endl;
+        cout << "|======================================|" << endl;
+        cout << "| -1. Urutkan berdasarkan harga        |" << endl;
+        cout << "|======================================|" << endl;
         for (int i = 0; i < foodCount; i++) {
-            cout << (i + 1) << ". " << foodMenu[i].name << "\t : Rp." << foodMenu[i].price << endl;
+            cout << "| "<<  (i + 1) << ". " << foodMenu[i].name << "\t\t : Rp." << foodMenu[i].price << endl;
         }
         for (int i = 0; i < drinkCount; i++) {
-            cout << (foodCount + i + 1) << ". " << drinkMenu[i].name << "\t : Rp." << drinkMenu[i].price << endl;
+            cout << "| " << (foodCount + i + 1) << ". " << drinkMenu[i].name << "\t\t : Rp." << drinkMenu[i].price << endl;
         }
-        cout << "==================================" << endl;
+        cout << "======================================" << endl;
     }
     
     MenuItem getItemByIndex(int index) {
@@ -235,11 +237,15 @@ void showMenuEcommerce(){
     int jumlahPesanan = 0;
     
     do {
-        cout << "\n--- GO-FOOD ---" << endl;
-        cout << "1. Fast Food " << endl;
-        cout << "2. Jajanan " << endl;
-        cout << "3. Kembali ke Menu Utama" << endl;
+        cout << "\n==================================" << endl;
+        cout << "|           GO-FOOD              |" << endl;
+        cout << "|================================|" << endl;
+        cout << "| 1. Fast Food                   |" << endl;
+        cout << "| 2. Jajanan                     |" << endl;
+        cout << "| 3. Kembali ke Menu Utama       |" << endl;
+        cout << "==================================" << endl;
         cout << "Jawaban: ";
+
         cin >> userInput5;
 
         switch (userInput5) {
@@ -247,7 +253,7 @@ void showMenuEcommerce(){
             pilihItem = -2;
             menu1.displayMenuFastFood();
             while (pilihItem != 0) {
-                cout << "Pilih nomor pesanan (0 untuk batal): ";
+                cout << "Pilih nomor pesanan (0 untuk keluar): ";
                 cin >> pilihItem;
                 
                 if (pilihItem == -1) {
@@ -291,8 +297,7 @@ void showMenuEcommerce(){
                 pilihItem = -2;
                 menu2.displayMenuJajanan();
                 while (pilihItem != 0) {
-                    cout << "\nKetik -1 jika ingin mengurutkan makanan berdasarkan harga" << endl;
-                    cout << "Pilih nomor menu yang ingin dipesan (0 untuk batal): ";
+                    cout << "Pilih nomor pesanan (0 untuk keluar): ";
                     cin >> pilihItem;
                     
                     if (pilihItem == -1) {
@@ -345,22 +350,25 @@ void showMenuEcommerce(){
         // Setelah keluar, tampilkan daftar pesanan
         if (jumlahPesanan > 0) {
             string konfirmasiPembayaran;
-            cout << "\n========= Daftar Pesanan Anda =========" << endl;
+            cout << "\n============================================" << endl;
+            cout << "|           DAFTAR PESANAN ANDA            |" << endl;
+            cout << "|==========================================|" << endl;
             for (int i = 0; i < jumlahPesanan; i++) {
-                cout << (i + 1) << ". " << daftarPesanan[i].name << " \t- Rp" << daftarPesanan[i].price << endl;
+                cout << "| " << (i + 1) << ". " << daftarPesanan[i].name << " \t- Rp. " << daftarPesanan[i].price << endl;
             }
-            cout << "=======================================" << endl;
-            cout << "Total Pembayaran\t: Rp" << total << endl;
-            cout << "Saldo anda saat ini\t: Rp." << dataATM[akunAktif].saldo << endl;
-            cout << "Pesan Sekarang (ya/tidak)\t: ";
+            cout << "|==========================================|" << endl;
+            cout << "| Total Pembayaran\t: Rp. " << total << endl;
+            cout << "| Saldo anda saat ini\t: Rp. " << dataATM[akunAktif].saldo << endl;
+            cout << "| Pesan Sekarang (ya/tidak): ";
             cin >> konfirmasiPembayaran;
-            cout << "=======================================" << endl;
+            cout << "|==========================================|" << endl;
             if (konfirmasiPembayaran == "ya" || konfirmasiPembayaran == "YA"){
                 if (dataATM[akunAktif].saldo >= total){
                     dataATM[akunAktif].saldo -= total;
-                    cout << "Saldo anda saat ini\t : Rp." << dataATM[akunAktif].saldo << endl;
-                    cout << "Kurir akan segera meengantarkan pesanan, mohon tunggu beberapa meenit ya!!!"<< endl;
-                    cout << "=======================================" << endl;
+                    cout << "| Saldo anda saat ini\t : Rp." << dataATM[akunAktif].saldo << endl;
+                    cout << "| Kurir akan segera mengantarkan pesanan.  |" << endl;
+                    cout << "| mohon tunggu beberapa menit ya!!! \t   |"<< endl;
+                    cout << "============================================" << endl;
                     simpanDataAkun();
                 }
                 else{

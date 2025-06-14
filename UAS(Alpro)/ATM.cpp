@@ -9,46 +9,51 @@ void showMenuAtm() {
     int userInput2;
 
     do {
-        cout << "\n--- ATM ---" << endl;
-        cout << "SALDO ANDA: Rp" << dataATM[akunAktif].saldo << endl;
-        cout << "1. TRANSFER" << endl;
-        cout << "2. TOP UP" << endl;
-        cout << "3. KEMBALI" << endl;
-        cout << "Jawaban: ";
+        cout << "\n==============================" << endl;
+        cout << "|           ATM              |" << endl;
+        cout << "|============================|" << endl;
+        cout << "| Saldo Anda: Rp. " << dataATM[akunAktif].saldo << endl;
+        cout << "|============================|" << endl;
+        cout << "| 1. Transfer                |" << endl;
+        cout << "| 2. Top Up                  |" << endl;
+        cout << "| 3. Kembali                 |" << endl;
+        cout << "==============================" << endl;
+        cout << "Pilihan Anda: ";
         cin >> userInput2;
 
         switch (userInput2) {
             case 1: {
-                cout << "\nPilih Rekening yang ingin ditransfer:\n";
-                int nomor = 1;
-                int mapping[100]; // simpan indeks asli
+                cout << "\n==============================" << endl;
+                cout << "|     PILIH TUJUAN TRANSFER  |" << endl;
+                cout << "==============================" << endl;
 
-                // Menampilkan semua akun kecuali akun aktif
+                int nomor = 1;
+                int mapping[100]; // menyimpan indeks asli tujuan
+
                 for (int i = 0; i < akunTerdaftar; i++) {
                     if (i == akunAktif) continue;
-                    cout << nomor << ". " << usernames[i] << endl;
+                    cout << "| " << nomor << ". " << usernames[i] << endl;
                     mapping[nomor - 1] = i;
                     nomor++;
                 }
-
                 if (nomor == 1) {
-                    cout << "Tidak ada akun lain untuk ditransfer.\n";
+                    cout << "| Tidak ada akun lain tersedia |\n";
+                    cout << "==============================" << endl;
                     break;
                 }
 
+                cout << "==============================" << endl;
                 int pilihan;
-                cout << "Masukkan nomor akun tujuan transfer: ";
+                cout << "Masukkan nomor tujuan: ";
                 cin >> pilihan;
 
-                // Validasi pilihan
                 if (pilihan < 1 || pilihan >= nomor) {
                     cout << "Pilihan tidak valid.\n";
                     break;
                 }
 
                 int indeksTujuan = mapping[pilihan - 1];
-
-                cout << "Masukkan jumlah uang yang ingin ditransfer: ";
+                cout << "Jumlah transfer: Rp. ";
                 cin >> dataATM[akunAktif].transfer;
 
                 if (dataATM[akunAktif].transfer > dataATM[akunAktif].saldo) {
@@ -56,14 +61,17 @@ void showMenuAtm() {
                 } else {
                     dataATM[akunAktif].saldo -= dataATM[akunAktif].transfer;
                     dataATM[indeksTujuan].saldo += dataATM[akunAktif].transfer;
-                    cout << "Transfer berhasil ke " << usernames[indeksTujuan] << ".\n";
+                    cout << "Transfer berhasil ke " << usernames[indeksTujuan] << "!\n";
                     simpanDataAkun();
                 }
                 break;
             }
 
             case 2:
-                cout << "Masukkan jumlah uang yang ingin dimasukkan: ";
+                cout << "\n====================================" << endl;
+                cout << "|              TOP UP              |" << endl;
+                cout << "====================================" << endl;
+                cout << "Masukkan jumlah Top Up: Rp. ";
                 cin >> dataATM[akunAktif].topUp;
                 dataATM[akunAktif].saldo += dataATM[akunAktif].topUp;
                 cout << "Top up berhasil.\n";
@@ -71,7 +79,7 @@ void showMenuAtm() {
 
             case 3:
                 simpanDataAkun();
-                cout << "Kembali ke menu utama.\n";
+                cout << "\nKembali ke menu utama...\n";
                 break;
 
             default:
