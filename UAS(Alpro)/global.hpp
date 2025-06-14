@@ -9,7 +9,6 @@ const int maxUser = 100;
 struct ATM {
     int saldo = 10000;
     int transfer;
-    int tarikTunai;
     int topUp;
 };
 

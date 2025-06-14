@@ -1,4 +1,4 @@
-adit 1246 96000
+adit 1246 130000
 faiz faizganteng 810000
-diacantik diahkyut 10000
-ipul 9696 0
+diacantik diahkyut 60000
+ipul 9696 16000

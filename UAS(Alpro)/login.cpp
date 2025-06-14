@@ -13,7 +13,6 @@ void inputlogin();
 void simpanDataAkun();
 void muatDataAkun();
 
-/////////////////////////////////////////////////////////////////// LOGIN
 void Start(){
     muatDataAkun();
     int userInput;
