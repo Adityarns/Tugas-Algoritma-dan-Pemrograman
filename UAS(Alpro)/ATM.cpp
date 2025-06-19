@@ -10,12 +10,12 @@ void showMenuAtm() {
 
     do {
         cout << "\n==============================" << endl;
-        cout << "|           ATM              |" << endl;
+        cout << "|           My Pulsa         |" << endl;
         cout << "|============================|" << endl;
         cout << "| Saldo Anda: Rp. " << dataATM[akunAktif].saldo << endl;
         cout << "|============================|" << endl;
-        cout << "| 1. Transfer                |" << endl;
-        cout << "| 2. Top Up                  |" << endl;
+        cout << "| 1. Transfer Pulsa          |" << endl;
+        cout << "| 2. Isi Pulsa               |" << endl;
         cout << "| 3. Kembali                 |" << endl;
         cout << "==============================" << endl;
         cout << "Pilihan Anda: ";

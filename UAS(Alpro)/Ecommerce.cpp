@@ -22,11 +22,6 @@ public:
         this->name = n;
         this->price = p;
     }
-
-    void display(int index) {
-        cout << index << ". " << name << "\t : \tRp." << price << endl;
-    }
-    
 };
 
 class templateMenu {
@@ -38,6 +33,15 @@ public:
     MenuItem drinkMenu[MAX_ITEM];
     MenuItem originalDrinkMenu[MAX_ITEM];
     MenuItem originalFoodMenu[MAX_ITEM];
+
+    int getFoodCount() const {
+        return foodCount;
+    }
+
+    int getDrinkCount() const {
+        return drinkCount;
+    }
+
     void sortByPrice(bool ascending = true) {
         // Bubble Sort Makanan
         for (int i = 0; i < foodCount - 1; i++) {
@@ -72,6 +76,30 @@ public:
         }
         for (int i = 0; i < drinkCount; i++) {
             drinkMenu[i] = originalDrinkMenu[i];
+        }
+    }
+
+    void hapusItemMenu(bool isFood, int index) {
+        if (isFood) {
+            if (index < 0 || index >= foodCount) {
+                cout << "Index makanan tidak valid.\n";
+                return;
+            }
+            for (int i = index; i < foodCount - 1; i++) {
+                foodMenu[i] = foodMenu[i + 1];
+            }
+            foodCount--;
+            cout << "[✓] Menu makanan berhasil dihapus.\n";
+        } else {
+            if (index < 0 || index >= drinkCount) {
+                cout << "Index minuman tidak valid.\n";
+                return;
+            }
+            for (int i = index; i < drinkCount - 1; i++) {
+                drinkMenu[i] = drinkMenu[i + 1];
+            }
+            drinkCount--;
+            cout << "[✓] Menu minuman berhasil dihapus.\n";
         }
     }
 
@@ -134,6 +162,8 @@ public:
         cout << "|           MENU FAST FOOD             |" << endl;
         cout << "|======================================|" << endl;
         cout << "| -1. Urutkan berdasarkan harga        |" << endl;
+        cout << "|======================================|" << endl;
+        cout << "| -2. Hapus Menu                       |" << endl;
         cout << "|======================================|" << endl;
         for (int i = 0; i < foodCount; i++) {
             cout << "| " << (i + 1) << ". " << foodMenu[i].name << "\t : Rp." << foodMenu[i].price << endl;
@@ -290,6 +320,26 @@ void showMenuEcommerce(){
                             cout << "Nomor menu tidak valid." << endl;
                         }
                     }
+                else if (pilihItem == -2) {
+                    int jenis, hapusIndex;
+                    cout << "Hapus (1) Makanan atau (2) Minuman? ";
+                    cin >> jenis;
+                    cout << "Masukkan nomor menu yang ingin dihapus: ";
+                    cin >> hapusIndex;
+                
+                    if (jenis == 1) {
+                        menu1.hapusItemMenu(true, hapusIndex - 1);
+                    } 
+                    else if (jenis == 2) {
+                        menu1.hapusItemMenu(false, hapusIndex - menu1.getFoodCount() - 1);                    } 
+                    else {
+                        cout << "Jenis tidak valid.\n";
+                    }
+                
+                    menu1.displayMenuFastFood(); // Tampilkan ulang
+                    pilihItem = -2;
+                    continue;
+                }
                 }
                 break;
                 

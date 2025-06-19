@@ -65,7 +65,7 @@ void showMenuKalkulatorSederhana() {
 
         kalkulatorSederhana(userInput3, hasil);
         if (userInput3 >= 1 && userInput3 <= 5) {
-            cout << "------------------------------" << endl;
+            cout << "==============================" << endl;
             cout << "Hasil: " << hasil << endl;
         }
 
@@ -156,7 +156,7 @@ void showMenuKalkulatorSuhu() {
     cout << "Masukkan satuan (C/F/K): ";
     cin >> satuan;
 
-    cout << "------------------------------" << endl;
+    cout << "==============================" << endl;
     konversiSuhu(suhu, satuan);
 }
 

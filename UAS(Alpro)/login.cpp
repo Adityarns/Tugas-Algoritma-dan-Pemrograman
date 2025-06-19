@@ -1,9 +1,11 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <conio.h>
 #include "calculator.cpp"
 #include "game.cpp"
 #include "Ecommerce.cpp"
+#include "kontak.cpp"
 #include "global.hpp"
 
 using namespace std;
@@ -16,6 +18,8 @@ void showMenuAtm();
 void showMenuKalkulator();
 void showMenuGame();
 void showMenuEcommerce();
+string inputSandiDenganBintang();
+void kirimPesan();
 
 string usernames[maxUser];
 string sandi[maxUser];
@@ -59,7 +63,8 @@ void showMenuUtama() {
         cout << "| 2. Kalkulator              |\n";
         cout << "| 3. GO-Food                 |\n";
         cout << "| 4. Game                    |\n";
-        cout << "| 5. Logout / Keluar         |\n";
+        cout << "| 5. Kontak                  |\n";
+        cout << "| 6. Logout / Keluar         |\n";
         cout << "==============================\n";
         cout << "Pilih: ";
         cin >> userInput1;
@@ -69,7 +74,8 @@ void showMenuUtama() {
             case 2: showMenuKalkulator(); break;
             case 3: showMenuEcommerce(); break;
             case 4: showMenuGame(); break;
-            case 5:
+            case 5: showMenuKontak(); break;
+            case 6:
                 cout << "\n[!] Logout. Kembali ke menu awal.\n";
                 return;
             default:
@@ -89,12 +95,12 @@ void inputlogin() {
         cout << "Username : ";
         cin >> inputNama;
         cout << "Sandi    : ";
-        cin >> inputSandi;
+        inputSandi = inputSandiDenganBintang();
 
         for (int j = 0; j < akunTerdaftar; j++) {
             if (usernames[j] == inputNama && sandi[j] == inputSandi) {
                 akunAktif = j;
-                cout << "\n[OK] Login berhasil. Selamat datang, " << inputNama << "!\n";
+                cout << "\nLogin berhasil. Selamat datang, " << inputNama << "!\n";
                 loginSukses = true;
                 showMenuUtama();
                 return;
@@ -128,15 +134,13 @@ void buatAkun() {
     }
 
     cout << "Sandi baru   : ";
-    cin >> newPassword;
+    newPassword = inputSandiDenganBintang();
 
     usernames[akunTerdaftar] = newUsername;
     sandi[akunTerdaftar] = newPassword;
     dataATM[akunTerdaftar].saldo = 10000;
     akunTerdaftar++;
     simpanDataAkun();
-
-    cout << "[OK] Akun berhasil dibuat.\n";
 }
 
 void simpanDataAkun() {
@@ -168,3 +172,22 @@ void muatDataAkun() {
         cout << "(Info: File akun.txt belum tersedia.)\n";
     }
 }
+
+string inputSandiDenganBintang() {
+    string pass;
+    char ch;
+    while ((ch = getch()) != '\r') { // '\r' adalah Enter
+        if (ch == '\b') { // jika Backspace
+            if (!pass.empty()) {
+                cout << "\b \b"; // hapus satu karakter di layar
+                pass.pop_back();
+            }
+        } else {
+            pass.push_back(ch);
+            cout << '*';
+        }
+    }
+    cout << endl;
+    return pass;
+}
+
