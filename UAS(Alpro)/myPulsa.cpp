@@ -9,10 +9,22 @@ void showMenuAtm() {
     int userInput2;
 
     do {
+        if (dataPulsa[akunAktif].nomorHp.empty() || dataPulsa[akunAktif].nomorHp == "-") {
+            cout << "\n[!] Nomor HP belum terdaftar pada akun Anda.\n";
+            cout << "Silakan masukkan nomor HP Anda terlebih dahulu: ";
+            string nomorBaru;
+            cin >> nomorBaru;
+            
+            // Simpan ke data akun aktif
+            dataPulsa[akunAktif].nomorHp = nomorBaru;
+            simpanDataAkun(); // Update ke file
+            
+            cout << "[✓] Nomor HP berhasil ditambahkan.\n";
+        }
         cout << "\n==============================" << endl;
         cout << "|           My Pulsa         |" << endl;
         cout << "|============================|" << endl;
-        cout << "| Saldo Anda: Rp. " << dataATM[akunAktif].saldo << endl;
+        cout << "| Saldo Anda: Rp. " << dataPulsa[akunAktif].saldo << endl;
         cout << "|============================|" << endl;
         cout << "| 1. Transfer Pulsa          |" << endl;
         cout << "| 2. Isi Pulsa               |" << endl;
@@ -54,13 +66,13 @@ void showMenuAtm() {
 
                 int indeksTujuan = mapping[pilihan - 1];
                 cout << "Jumlah transfer: Rp. ";
-                cin >> dataATM[akunAktif].transfer;
+                cin >> dataPulsa[akunAktif].transfer;
 
-                if (dataATM[akunAktif].transfer > dataATM[akunAktif].saldo) {
+                if (dataPulsa[akunAktif].transfer > dataPulsa[akunAktif].saldo) {
                     cout << "Saldo tidak cukup.\n";
                 } else {
-                    dataATM[akunAktif].saldo -= dataATM[akunAktif].transfer;
-                    dataATM[indeksTujuan].saldo += dataATM[akunAktif].transfer;
+                    dataPulsa[akunAktif].saldo -= dataPulsa[akunAktif].transfer;
+                    dataPulsa[indeksTujuan].saldo += dataPulsa[akunAktif].transfer;
                     cout << "Transfer berhasil ke " << usernames[indeksTujuan] << "!\n";
                     simpanDataAkun();
                 }
@@ -72,8 +84,8 @@ void showMenuAtm() {
                 cout << "|              TOP UP              |" << endl;
                 cout << "====================================" << endl;
                 cout << "Masukkan jumlah Top Up: Rp. ";
-                cin >> dataATM[akunAktif].topUp;
-                dataATM[akunAktif].saldo += dataATM[akunAktif].topUp;
+                cin >> dataPulsa[akunAktif].topUp;
+                dataPulsa[akunAktif].saldo += dataPulsa[akunAktif].topUp;
                 cout << "Top up berhasil.\n";
                 break;
 

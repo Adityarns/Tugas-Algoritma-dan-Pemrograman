@@ -6,15 +6,16 @@ using namespace std;
 
 const int maxUser = 100;
 
-struct ATM {
+struct Pulsa {
     long long saldo;
     long long topUp;
     long long transfer;
+    string nomorHp;
 };
 
 extern string usernames[maxUser];
 extern string sandi[maxUser];
-extern ATM dataATM[maxUser];
+extern Pulsa dataPulsa[maxUser];
 extern int akunTerdaftar;
 extern int akunAktif;
 extern string akunSaatini;

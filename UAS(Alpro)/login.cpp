@@ -4,8 +4,8 @@
 #include <conio.h>
 #include "calculator.cpp"
 #include "game.cpp"
-#include "Ecommerce.cpp"
-#include "kontak.cpp"
+#include "goFood.cpp"
+#include "Pesan.cpp"
 #include "global.hpp"
 
 using namespace std;
@@ -23,7 +23,7 @@ void kirimPesan();
 
 string usernames[maxUser];
 string sandi[maxUser];
-ATM dataATM[maxUser];
+Pulsa dataPulsa[maxUser];
 int akunTerdaftar = 0;
 int akunAktif = 0;
 
@@ -59,7 +59,7 @@ void showMenuUtama() {
         cout << "\n==============================\n";
         cout << "|         FITUR APP          |\n";
         cout << "|============================|\n";
-        cout << "| 1. ATM                     |\n";
+        cout << "| 1. MyPulsa                 |\n";
         cout << "| 2. Kalkulator              |\n";
         cout << "| 3. GO-Food                 |\n";
         cout << "| 4. Game                    |\n";
@@ -138,7 +138,7 @@ void buatAkun() {
 
     usernames[akunTerdaftar] = newUsername;
     sandi[akunTerdaftar] = newPassword;
-    dataATM[akunTerdaftar].saldo = 10000;
+    dataPulsa[akunTerdaftar].saldo = 10000;
     akunTerdaftar++;
     simpanDataAkun();
 }
@@ -147,7 +147,8 @@ void simpanDataAkun() {
     ofstream file("akun.txt");
     if (file.is_open()) {
         for (int i = 0; i < akunTerdaftar; ++i) {
-            file << usernames[i] << " " << sandi[i] << " " << dataATM[i].saldo << endl;
+            file << usernames[i] << " " << sandi[i] << " "
+                 << dataPulsa[i].saldo << " " << dataPulsa[i].nomorHp << endl;
         }
         file.close();
     } else {
@@ -155,16 +156,18 @@ void simpanDataAkun() {
     }
 }
 
+
 void muatDataAkun() {
     ifstream file("akun.txt");
-    string uname, pass;
+    string uname, pass, nomor;
     int saldo;
     akunTerdaftar = 0;
     if (file.is_open()) {
-        while (file >> uname >> pass >> saldo && akunTerdaftar < maxUser) {
+        while (file >> uname >> pass >> saldo >> nomor && akunTerdaftar < maxUser) {
             usernames[akunTerdaftar] = uname;
             sandi[akunTerdaftar] = pass;
-            dataATM[akunTerdaftar].saldo = saldo;
+            dataPulsa[akunTerdaftar].saldo = saldo;
+            dataPulsa[akunTerdaftar].nomorHp = nomor;
             akunTerdaftar++;
         }
         file.close();
@@ -172,6 +175,7 @@ void muatDataAkun() {
         cout << "(Info: File akun.txt belum tersedia.)\n";
     }
 }
+
 
 string inputSandiDenganBintang() {
     string pass;

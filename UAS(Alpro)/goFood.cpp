@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ATM.cpp"
+#include "myPulsa.cpp"
 
 using namespace std;
 
@@ -408,14 +408,14 @@ void showMenuEcommerce(){
             }
             cout << "|==========================================|" << endl;
             cout << "| Total Pembayaran\t: Rp. " << total << endl;
-            cout << "| Saldo anda saat ini\t: Rp. " << dataATM[akunAktif].saldo << endl;
+            cout << "| Saldo anda saat ini\t: Rp. " << dataPulsa[akunAktif].saldo << endl;
             cout << "| Pesan Sekarang (ya/tidak): ";
             cin >> konfirmasiPembayaran;
             cout << "|==========================================|" << endl;
             if (konfirmasiPembayaran == "ya" || konfirmasiPembayaran == "YA"){
-                if (dataATM[akunAktif].saldo >= total){
-                    dataATM[akunAktif].saldo -= total;
-                    cout << "| Saldo anda saat ini\t : Rp." << dataATM[akunAktif].saldo << endl;
+                if (dataPulsa[akunAktif].saldo >= total){
+                    dataPulsa[akunAktif].saldo -= total;
+                    cout << "| Saldo anda saat ini\t : Rp." << dataPulsa[akunAktif].saldo << endl;
                     cout << "| Kurir akan segera mengantarkan pesanan.  |" << endl;
                     cout << "| mohon tunggu beberapa menit ya!!! \t   |"<< endl;
                     cout << "============================================" << endl;
