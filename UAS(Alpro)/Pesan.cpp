@@ -81,11 +81,26 @@ void kirimPesan() {
     cout << "Tulis pesan: ";
     getline(cin, isiPesan);
 
+    // Cari username tujuan berdasarkan nomor
+    string usernameTujuan = "";
+    for (int i = 0; i < akunTerdaftar; ++i) {
+        if (dataPulsa[i].nomorHp == nomorTujuan) {
+            usernameTujuan = usernames[i];
+            break;
+        }
+    }
+    
+    if (usernameTujuan.empty()) {
+        cout << "[!] Nomor kontak tidak terhubung dengan akun manapun.\n";
+        return;
+    }
+    
     ofstream fileOut("pesan.txt", ios::app);
-    fileOut << akunSaatini << "|" << nomorTujuan << "|" << isiPesan << endl;
+    fileOut << akunSaatini << "|" << usernameTujuan << "|" << isiPesan << endl;
     fileOut.close();
-
+    
     cout << "[✓] Pesan berhasil dikirim ke " << daftarKontak[pilihan - 1].second << endl;
+    
 }
 
 

@@ -28,7 +28,6 @@ void showMenuKontak() {
                 tambahKontak(akunSaatini);
                 break;
             case -1:
-                akunSaatini = "";
                 cout << "\nLogout berhasil.\n";
                 break;
             default:
@@ -39,10 +38,14 @@ void showMenuKontak() {
 
 void tambahKontak(string usernameAktif) {
     string nomorDicari;
-    cout << "\nMasukkan nomor HP : ";
+    cout << "\n==================================\n";
+    cout << "|        TAMBAHKAN KONTAK        |\n";
+    cout << "|================================|\n";
+    cout << "| Masukkan nomor HP : ";
     cin >> nomorDicari;
+    cout << "|================================|\n";
     cin.ignore();
-
+    
     ifstream akunFile("akun.txt");
     bool ditemukan = false;
     string uname, pass, nomor;
@@ -51,7 +54,7 @@ void tambahKontak(string usernameAktif) {
     while (akunFile >> uname >> pass >> saldo >> nomor) {
         if (nomor == nomorDicari) {
             ditemukan = true;
-
+            
             // Cek apakah kontak sudah ada
             ifstream kontakCek("kontak.txt");
             string u, no, nama;
@@ -63,13 +66,13 @@ void tambahKontak(string usernameAktif) {
                 }
             }
             kontakCek.close();
-
+            
             if (sudahAda) {
                 cout << "Kontak ini sudah ada dalam daftar Anda.\n";
                 return;
             }
 
-            cout << "\nNomor ditemukan a/n: " << uname << endl;
+            cout << "| Nomor ditemukan a/n: " << uname << endl <<  " |";
             string namaTersimpan;
             cout << "Masukkan nama yang ingin disimpan untuk kontak ini (ENTER = '" << uname << "'): ";
             getline(cin, namaTersimpan);
@@ -98,17 +101,19 @@ void tampilkanKontak(string username) {
     ifstream file("kontak.txt");
     string user, nomor, namaKontak;
     bool adaKontak = false;
+    int i = 1; // dipindah ke luar
 
     while (file >> user >> nomor >> ws && getline(file, namaKontak)) {
-        int i = 0;
         if (user == username) {
-            cout << "|  " << i + 1  << ". " << namaKontak << " (" << nomor << ")\n";
+            cout << "|  " << i << ". " << namaKontak << " (" << nomor << ")\n";
             adaKontak = true;
-            i++;
+            i++; // naikkan penomoran
         }
     }
+
     if (!adaKontak) {
-        cout << "Anda belum memiliki kontak.\n";
+        cout << "|  (Anda belum memiliki kontak)\n";
     }
+
     file.close();
 }

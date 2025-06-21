@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include "global.hpp"
 
 using namespace std;
@@ -14,13 +15,12 @@ void showMenuPulsa() {
             cout << "Silakan masukkan nomor HP Anda terlebih dahulu: ";
             string nomorBaru;
             cin >> nomorBaru;
-            
-            // Simpan ke data akun aktif
+
             dataPulsa[akunAktif].nomorHp = nomorBaru;
-            simpanDataAkun(); // Update ke file
-            
+            simpanDataAkun();
             cout << "[✓] Nomor HP berhasil ditambahkan.\n";
         }
+
         cout << "\n==============================" << endl;
         cout << "|           My Pulsa         |" << endl;
         cout << "|============================|" << endl;
@@ -39,18 +39,30 @@ void showMenuPulsa() {
                 cout << "|     PILIH TUJUAN TRANSFER  |" << endl;
                 cout << "==============================" << endl;
 
-                int nomor = 1;
-                int mapping[100]; // menyimpan indeks asli tujuan
+                // Ambil kontak dari kontak.txt
+                ifstream kontakFile("kontak.txt");
+                string user, nomorTujuan, nama;
+                vector<int> mapping;
+                int nomorUrut = 1;
 
-                for (int i = 0; i < akunTerdaftar; i++) {
-                    if (i == akunAktif) continue;
-                    cout << "| " << nomor << ". " << usernames[i] << endl;
-                    mapping[nomor - 1] = i;
-                    nomor++;
+                while (kontakFile >> user >> nomorTujuan >> ws && getline(kontakFile, nama)) {
+                    if (user == akunSaatini) {
+                        // Cari nomorTujuan di dataPulsa
+                        for (int i = 0; i < akunTerdaftar; ++i) {
+                            if (dataPulsa[i].nomorHp == nomorTujuan) {
+                                cout << "| " << nomorUrut << ". " << nama << " (" << nomorTujuan << ")\n";
+                                mapping.push_back(i); // simpan index akun tujuan
+                                nomorUrut++;
+                                break;
+                            }
+                        }
+                    }
                 }
-                if (nomor == 1) {
-                    cout << "| Tidak ada akun lain tersedia |\n";
-                    cout << "==============================" << endl;
+                kontakFile.close();
+
+                if (mapping.empty()) {
+                    cout << "| Anda belum memiliki kontak yang valid untuk transfer |\n";
+                    cout << "==============================\n";
                     break;
                 }
 
@@ -59,7 +71,7 @@ void showMenuPulsa() {
                 cout << "Masukkan nomor tujuan: ";
                 cin >> pilihan;
 
-                if (pilihan < 1 || pilihan >= nomor) {
+                if (pilihan < 1 || pilihan > mapping.size()) {
                     cout << "Pilihan tidak valid.\n";
                     break;
                 }
