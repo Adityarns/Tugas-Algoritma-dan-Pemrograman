@@ -6,6 +6,7 @@
 #include "game.cpp"
 #include "goFood.cpp"
 #include "Pesan.cpp"
+#include "Kontak.cpp"
 #include "global.hpp"
 
 using namespace std;
@@ -14,15 +15,17 @@ void buatAkun();
 void inputlogin();
 void simpanDataAkun();
 void muatDataAkun();
-void showMenuAtm();
+void showMenuPulsa();
 void showMenuKalkulator();
 void showMenuGame();
-void showMenuEcommerce();
+void showMenuGoFood();
+void showMenuKontak();
 string inputSandiDenganBintang();
 void kirimPesan();
 
 string usernames[maxUser];
 string sandi[maxUser];
+string akunSaatini;
 Pulsa dataPulsa[maxUser];
 int akunTerdaftar = 0;
 int akunAktif = 0;
@@ -45,10 +48,10 @@ void Start() {
             case 1: inputlogin(); break;
             case 2: buatAkun(); break;
             case 3:
-                cout << "\n[!] Terima kasih telah menggunakan aplikasi ini!\n";
+                cout << "\n Terima kasih telah menggunakan aplikasi ini!\n";
                 break;
             default:
-                cout << "\n[!] Pilihan tidak valid. Ulangi.\n";
+                cout << "\n Pilihan tidak valid. Ulangi.\n";
         }
     } while (userInput != 3);
 }
@@ -60,26 +63,28 @@ void showMenuUtama() {
         cout << "|         FITUR APP          |\n";
         cout << "|============================|\n";
         cout << "| 1. MyPulsa                 |\n";
-        cout << "| 2. Kalkulator              |\n";
-        cout << "| 3. GO-Food                 |\n";
-        cout << "| 4. Game                    |\n";
-        cout << "| 5. Kontak                  |\n";
-        cout << "| 6. Logout / Keluar         |\n";
+        cout << "| 2. Kontak                  |\n";
+        cout << "| 3. Pesan                   |\n";
+        cout << "| 4. Kalkulator              |\n";
+        cout << "| 5. GO-Food                 |\n";
+        cout << "| 6. Game                    |\n";
+        cout << "| 7. Logout / Keluar         |\n";
         cout << "==============================\n";
         cout << "Pilih: ";
         cin >> userInput1;
 
         switch (userInput1) {
-            case 1: showMenuAtm(); break;
-            case 2: showMenuKalkulator(); break;
-            case 3: showMenuEcommerce(); break;
-            case 4: showMenuGame(); break;
-            case 5: showMenuKontak(); break;
-            case 6:
-                cout << "\n[!] Logout. Kembali ke menu awal.\n";
+            case 1: showMenuPulsa(); break;
+            case 2: showMenuKontak(); break;
+            case 3: showMenuPesan(); break;
+            case 4: showMenuKalkulator(); break;
+            case 5: showMenuGoFood(); break;
+            case 6: showMenuGame(); break;
+            case 7:
+                cout << "\n Logout. Kembali ke menu awal.\n";
                 return;
             default:
-                cout << "\n[!] Pilihan tidak valid.\n";
+                cout << "\n Pilihan tidak valid.\n";
         }
     } while (true);
 }
@@ -100,16 +105,17 @@ void inputlogin() {
         for (int j = 0; j < akunTerdaftar; j++) {
             if (usernames[j] == inputNama && sandi[j] == inputSandi) {
                 akunAktif = j;
+                akunSaatini = usernames[j];
                 cout << "\nLogin berhasil. Selamat datang, " << inputNama << "!\n";
                 loginSukses = true;
                 showMenuUtama();
                 return;
             }
         }
-        cout << "\n[!] Username atau sandi salah. Coba lagi.\n";
+        cout << "\nUsername atau sandi salah. Coba lagi.\n";
     }
 
-    cout << "\n[!] Gagal login setelah 3 kali percobaan.\n";
+    cout << "\nGagal login setelah 3 kali percobaan.\n";
 }
 
 void buatAkun() {
@@ -118,7 +124,7 @@ void buatAkun() {
     cout << "==============================\n";
 
     if (akunTerdaftar >= maxUser) {
-        cout << "[!] Kapasitas akun penuh.\n";
+        cout << "Kapasitas akun penuh.\n";
         return;
     }
 
@@ -128,7 +134,7 @@ void buatAkun() {
 
     for (int i = 0; i < akunTerdaftar; ++i) {
         if (usernames[i] == newUsername) {
-            cout << "[!] Username sudah ada.\n";
+            cout << "Username sudah ada.\n";
             return;
         }
     }
@@ -152,7 +158,7 @@ void simpanDataAkun() {
         }
         file.close();
     } else {
-        cout << "[!] Gagal menyimpan data akun.\n";
+        cout << "Gagal menyimpan data akun.\n";
     }
 }
 

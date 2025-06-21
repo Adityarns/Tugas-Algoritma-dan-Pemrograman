@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void showMenuAtm() {
+void showMenuPulsa() {
     int userInput2;
 
     do {
@@ -87,10 +87,10 @@ void showMenuAtm() {
                 cin >> dataPulsa[akunAktif].topUp;
                 dataPulsa[akunAktif].saldo += dataPulsa[akunAktif].topUp;
                 cout << "Top up berhasil.\n";
+                simpanDataAkun();
                 break;
 
             case 3:
-                simpanDataAkun();
                 cout << "\nKembali ke menu utama...\n";
                 break;
 

@@ -4,7 +4,7 @@
 using namespace std;
 
 
-void showMenuEcommerce();
+void showMenuGoFood();
 
 const int MAX_ITEM = 30;
 
@@ -254,7 +254,7 @@ class MenuJajanan : public templateMenu{
     }
 };
 
-void showMenuEcommerce(){
+void showMenuGoFood(){
     int userInput5;
     int total = 0;
     int pilihItem;
