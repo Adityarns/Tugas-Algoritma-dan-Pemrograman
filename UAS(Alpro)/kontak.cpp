@@ -17,18 +17,16 @@ void showMenuKontak() {
         tampilkanKontak(akunSaatini);
         cout << "|============================|\n";
         cout << "|  0. Tambah Kontak          |\n";
-        cout << "| -1. Logout                 |\n";
+        cout << "| -1. Keluar                 |\n";
         cout << "==============================\n";
-        cout << "Pilih: ";
-        cin >> userInput;
-        cin.ignore(); // untuk mencegah input loncat
+        userInput = inputInt("Pilih: ");
 
         switch (userInput) {
             case 0:
                 tambahKontak(akunSaatini);
                 break;
             case -1:
-                cout << "\nLogout berhasil.\n";
+                cout << "\nKeluar.\n";
                 break;
             default:
                 cout << "\nPilihan tidak valid. Coba lagi.\n";
@@ -44,13 +42,12 @@ void tambahKontak(string usernameAktif) {
     cout << "| Masukkan nomor HP : ";
     cin >> nomorDicari;
     cout << "|================================|\n";
-    cin.ignore();
     
     ifstream akunFile("akun.txt");
     bool ditemukan = false;
     string uname, pass, nomor;
     int saldo;
-
+    
     while (akunFile >> uname >> pass >> saldo >> nomor) {
         if (nomor == nomorDicari) {
             ditemukan = true;
@@ -68,13 +65,15 @@ void tambahKontak(string usernameAktif) {
             kontakCek.close();
             
             if (sudahAda) {
-                cout << "Kontak ini sudah ada dalam daftar Anda.\n";
+                cout << "\n===========================================\n";
+                cout << "| Kontak ini sudah ada dalam daftar Anda. |\n";
+                cout << "===========================================\n";
                 return;
             }
 
             cout << "| Nomor ditemukan a/n: " << uname << endl <<  " |";
             string namaTersimpan;
-            cout << "Masukkan nama yang ingin disimpan untuk kontak ini (ENTER = '" << uname << "'): ";
+            cout << "Masukkan nama untuk disimpan pada kontak ini (ENTER = '" << uname << "'): ";
             getline(cin, namaTersimpan);
             if (namaTersimpan.empty()) namaTersimpan = uname;
 
@@ -83,17 +82,23 @@ void tambahKontak(string usernameAktif) {
             if (kontakFile.is_open()) {
                 kontakFile << usernameAktif << " " << nomorDicari << " " << namaTersimpan << endl;
                 kontakFile.close();
-                cout << "Kontak berhasil ditambahkan!\n";
+                cout << "\n===============================\n";
+                cout << "| Kontak berhasil ditambahkan. |\n";
+                cout << "================================\n";
             } else {
-                cout << "Gagal menyimpan kontak.\n";
+                cout << "\n===========================\n";
+                cout << "| Gagal menyimpan kontak. |\n";
+                cout << "===========================\n";
             }
             break;
         }
     }
-
+    
     akunFile.close();
     if (!ditemukan) {
-        cout << "Nomor tidak terdaftar dalam akun.\n";
+        cout << "\n=====================================\n";
+        cout << "| Nomor tidak terdaftar dalam akun. |\n";
+        cout << "=====================================\n";
     }
 }
 

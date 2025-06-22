@@ -22,7 +22,7 @@ void showMenuPulsa() {
         }
 
         cout << "\n==============================" << endl;
-        cout << "|           My Pulsa         |" << endl;
+        cout << "|          My Pulsa          |" << endl;
         cout << "|============================|" << endl;
         cout << "| Saldo Anda: Rp. " << dataPulsa[akunAktif].saldo << endl;
         cout << "|============================|" << endl;
@@ -30,27 +30,28 @@ void showMenuPulsa() {
         cout << "| 2. Isi Pulsa               |" << endl;
         cout << "| 3. Kembali                 |" << endl;
         cout << "==============================" << endl;
-        cout << "Pilihan Anda: ";
-        cin >> userInput2;
+        userInput2 = inputInt("Pilihan Anda: ");
 
         switch (userInput2) {
             case 1: {
                 cout << "\n==============================" << endl;
-                cout << "|     PILIH TUJUAN TRANSFER  |" << endl;
-                cout << "==============================" << endl;
-
+                cout << "|    PILIH TUJUAN TRANSFER   |" << endl;
+                cout << "|============================|" << endl;
+                cout << "| Saldo Anda: Rp. " << dataPulsa[akunAktif].saldo << endl;
+                cout << "|============================|" << endl;
+                
                 // Ambil kontak dari kontak.txt
                 ifstream kontakFile("kontak.txt");
                 string user, nomorTujuan, nama;
                 vector<int> mapping;
                 int nomorUrut = 1;
-
+                
                 while (kontakFile >> user >> nomorTujuan >> ws && getline(kontakFile, nama)) {
                     if (user == akunSaatini) {
                         // Cari nomorTujuan di dataPulsa
                         for (int i = 0; i < akunTerdaftar; ++i) {
                             if (dataPulsa[i].nomorHp == nomorTujuan) {
-                                cout << "| " << nomorUrut << ". " << nama << " (" << nomorTujuan << ")\n";
+                                cout << "| " << nomorUrut << ". " << nama << "\n";
                                 mapping.push_back(i); // simpan index akun tujuan
                                 nomorUrut++;
                                 break;
@@ -65,21 +66,18 @@ void showMenuPulsa() {
                     cout << "==============================\n";
                     break;
                 }
-
+                
                 cout << "==============================" << endl;
-                int pilihan;
-                cout << "Masukkan nomor tujuan: ";
-                cin >> pilihan;
-
+                int pilihan = inputInt("Masukkan nomor tujuan: ");                
+                
                 if (pilihan < 1 || pilihan > mapping.size()) {
                     cout << "Pilihan tidak valid.\n";
                     break;
                 }
 
                 int indeksTujuan = mapping[pilihan - 1];
-                cout << "Jumlah transfer: Rp. ";
-                cin >> dataPulsa[akunAktif].transfer;
-
+                dataPulsa[akunAktif].transfer = inputInt("Jumlah transfer: Rp. ");
+                
                 if (dataPulsa[akunAktif].transfer > dataPulsa[akunAktif].saldo) {
                     cout << "Saldo tidak cukup.\n";
                 } else {
@@ -90,13 +88,14 @@ void showMenuPulsa() {
                 }
                 break;
             }
-
+            
             case 2:
-                cout << "\n====================================" << endl;
-                cout << "|              TOP UP              |" << endl;
-                cout << "====================================" << endl;
-                cout << "Masukkan jumlah Top Up: Rp. ";
-                cin >> dataPulsa[akunAktif].topUp;
+            cout << "\n====================================" << endl;
+            cout << "|              TOP UP              |" << endl;
+            cout << "|==================================|" << endl;
+            cout << "| Saldo Anda: Rp. " << dataPulsa[akunAktif].saldo << endl;
+            cout << "|==================================|" << endl;
+                dataPulsa[akunAktif].topUp = inputInt("Masukkan jumlah Top Up: Rp. ");
                 dataPulsa[akunAktif].saldo += dataPulsa[akunAktif].topUp;
                 cout << "Top up berhasil.\n";
                 simpanDataAkun();

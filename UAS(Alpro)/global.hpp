@@ -25,5 +25,6 @@ void muatDataAkun();
 void buatAkun();
 void inputlogin();
 void showMenuAtm();
+int inputInt(const string& prompt);
 
 #endif
