@@ -5,6 +5,7 @@
 
 using namespace std;
 
+void hapusKontak(string usernameAktif);
 void tambahKontak(string usernameAktif);
 void tampilkanKontak(string username);
 
@@ -17,7 +18,8 @@ void showMenuKontak() {
         tampilkanKontak(akunSaatini);
         cout << "|============================|\n";
         cout << "|  0. Tambah Kontak          |\n";
-        cout << "| -1. Keluar                 |\n";
+        cout << "| -1. Hapus Kontak           |\n"; // Tambahan opsi
+        cout << "| -2. Keluar                 |\n";
         cout << "==============================\n";
         userInput = inputInt("Pilih: ");
 
@@ -26,22 +28,25 @@ void showMenuKontak() {
                 tambahKontak(akunSaatini);
                 break;
             case -1:
-                cout << "\nKeluar.\n";
+                hapusKontak(akunSaatini); // Panggil fungsi baru
+                break;
+            case -2:
                 break;
             default:
                 cout << "\nPilihan tidak valid. Coba lagi.\n";
         }
-    } while (userInput != -1);
+    } while (userInput != -2);
 }
+
 
 void tambahKontak(string usernameAktif) {
     string nomorDicari;
-    cout << "\n==================================\n";
-    cout << "|        TAMBAHKAN KONTAK        |\n";
-    cout << "|================================|\n";
+    cout << "\n========================================\n";
+    cout << "|           TAMBAHKAN KONTAK           |\n";
+    cout << "|======================================|\n";
     cout << "| Masukkan nomor HP : ";
     cin >> nomorDicari;
-    cout << "|================================|\n";
+    cout << "|======================================|\n";
     
     ifstream akunFile("akun.txt");
     bool ditemukan = false;
@@ -70,13 +75,17 @@ void tambahKontak(string usernameAktif) {
                 cout << "===========================================\n";
                 return;
             }
-
-            cout << "| Nomor ditemukan a/n: " << uname << endl <<  " |";
+            
+            cout << "| Nomor ditemukan a/n: " << uname << endl;
+            cout << "|======================================|\n";
             string namaTersimpan;
-            cout << "Masukkan nama untuk disimpan pada kontak ini (ENTER = '" << uname << "'): ";
+            cout << "| Masukkan Nama (Enter = '" << uname << "'): ";
             getline(cin, namaTersimpan);
-            if (namaTersimpan.empty()) namaTersimpan = uname;
+            cin.ignore();
+            cout << "========================================\n";
 
+            if (namaTersimpan.empty()) namaTersimpan = uname;
+            
             // Simpan ke kontak.txt
             ofstream kontakFile("kontak.txt", ios::app);
             if (kontakFile.is_open()) {
@@ -117,8 +126,68 @@ void tampilkanKontak(string username) {
     }
 
     if (!adaKontak) {
-        cout << "|  (Anda belum memiliki kontak)\n";
+        cout << "| Anda belum memiliki kontak |\n";
     }
 
     file.close();
+}
+
+void hapusKontak(string usernameAktif) {
+    vector<pair<string, string>> daftarKontak; // <nomor, nama>
+    ifstream file("kontak.txt");
+    string user, nomor, namaKontak;
+
+    while (file >> user >> nomor >> ws && getline(file, namaKontak)) {
+        if (user == usernameAktif) {
+            daftarKontak.push_back({nomor, namaKontak});
+        }
+    }
+    file.close();
+
+    if (daftarKontak.empty()) {
+        cout << "\n====================================\n";
+        cout << "| Anda belum memiliki kontak.      |\n";
+        cout << "====================================\n";
+        return;
+    }
+
+    cout << "\n====================================\n";
+    cout << "|           HAPUS KONTAK           |\n";
+    cout << "====================================\n";
+    for (int i = 0; i < daftarKontak.size(); ++i) {
+        cout << "|  " << (i + 1) << ". " << daftarKontak[i].second << " (" << daftarKontak[i].first << ")\n";
+    }
+    cout << "====================================\n";
+
+    
+    int pilih = inputInt("Pilih nomor kontak yang ingin dihapus (0 untuk batal): ");
+    while (pilih != 0){
+        if (pilih <= 0 || pilih > daftarKontak.size()) {
+        cout << "\nBatal menghapus kontak.\n";
+        return;
+        }
+
+        string nomorHapus = daftarKontak[pilih - 1].first;
+
+        // Proses hapus
+        ifstream inFile("kontak.txt");
+        ofstream outFile("temp.txt");
+
+        while (inFile >> user >> nomor >> ws && getline(inFile, namaKontak)) {
+            if (!(user == usernameAktif && nomor == nomorHapus)) {
+                outFile << user << " " << nomor << " " << namaKontak << endl;
+            }
+        }
+
+        inFile.close();
+        outFile.close();
+
+        remove("kontak.txt");
+        rename("temp.txt", "kontak.txt");
+
+        cout << "\n====================================\n";
+        cout << "| Kontak berhasil dihapus.         |\n";
+        cout << "====================================\n";
+        break;
+    }
 }

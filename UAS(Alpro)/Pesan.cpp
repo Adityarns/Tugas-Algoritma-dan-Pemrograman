@@ -20,9 +20,7 @@ void showMenuPesan() {
         cout << "| 2. Kirim Pesan        |" << endl;
         cout << "| 3. Kembali            |" << endl;
         cout << "=========================\n";
-        cout << "Pilih opsi: ";
-        cin >> pilihan;
-        cin.ignore();
+        pilihan = inputInt("Pilih opsi: ");
 
         switch (pilihan) {
             case 1:
@@ -40,47 +38,51 @@ void showMenuPesan() {
 }
 
 void kirimPesan() {
-    cout << "\n=========================\n";
-    cout << "|       KIRIM PESAN     |\n";
-    cout << "=========================\n";
-
+    cout << "\n=========================================\n";
+    cout << "|              KIRIM PESAN              |\n";
+    cout << "|=======================================|\n";
+    
     // 1. Ambil daftar kontak milik akunSaatini
     vector<pair<string, string>> daftarKontak; // (nomor, nama)
     ifstream kontakFile("kontak.txt");
     string user, nomor, nama;
-
+    
     while (kontakFile >> user >> nomor >> ws && getline(kontakFile, nama)) {
         if (user == akunSaatini) {
             daftarKontak.push_back({nomor, nama});
         }
     }
     kontakFile.close();
-
+    
     if (daftarKontak.empty()) {
-        cout << "[!] Anda belum memiliki kontak. Tambahkan dulu melalui menu kontak.\n";
+        cout << "\n===================================\n";
+        cout << "|   Anda belum memiliki kontak.   |\n";
+        cout << "===================================\n";
         return;
     }
-
-    cout << "\nDaftar kontak Anda:\n";
+    
+    cout << "|           Daftar kontak Anda:         |\n";
+    cout << "|=======================================|\n";
     for (int i = 0; i < daftarKontak.size(); ++i) {
-        cout << i + 1 << ". " << daftarKontak[i].second << " (" << daftarKontak[i].first << ")\n";
+        cout << "| " << i + 1 << ". " << daftarKontak[i].second << "\n";
     }
-
+    
     int pilihan;
-    cout << "Pilih nomor kontak tujuan (1-" << daftarKontak.size() << "): ";
-    cin >> pilihan;
-    cin.ignore();
-
+    cout << "|=======================================|\n";
+    pilihan = inputInt("| Pilih nomor tujuan: ");
+    cout << "|=======================================|\n";
+    
     if (pilihan < 1 || pilihan > daftarKontak.size()) {
         cout << "[!] Pilihan tidak valid.\n";
         return;
     }
-
+    
     string nomorTujuan = daftarKontak[pilihan - 1].first;
     string isiPesan;
-    cout << "Tulis pesan: ";
+    cout << "| Tulis pesan: ";
     getline(cin, isiPesan);
-
+    cout << "|=======================================|\n";
+    
     // Cari username tujuan berdasarkan nomor
     string usernameTujuan = "";
     for (int i = 0; i < akunTerdaftar; ++i) {
@@ -91,7 +93,7 @@ void kirimPesan() {
     }
     
     if (usernameTujuan.empty()) {
-        cout << "[!] Nomor kontak tidak terhubung dengan akun manapun.\n";
+        cout << "| Nomor kontak tidak terhubung dengan akun manapun. |\n";
         return;
     }
     
@@ -99,24 +101,28 @@ void kirimPesan() {
     fileOut << akunSaatini << "|" << usernameTujuan << "|" << isiPesan << endl;
     fileOut.close();
     
-    cout << "[✓] Pesan berhasil dikirim ke " << daftarKontak[pilihan - 1].second << endl;
+    cout << "|=======================================|\n";
+    cout << "| Pesan berhasil dikirim ke " << daftarKontak[pilihan - 1].second << endl;
+    cout << "|=======================================|\n";
     
 }
 
 
 void tampilkanPesanMasuk() {
-    cout << "\n=== PILIH PENGIRIM PESAN ===" << endl;
+    cout << "\n============================\n";
+    cout << "|   PILIH PENGIRIM PESAN   |" << endl;
+    cout << "|==========================|\n";
     ifstream fileIn("pesan.txt");
     string line;
     vector<string> pengirimUnik;
-
+    
     while (getline(fileIn, line)) {
         stringstream ss(line);
         string dari, ke, isi;
         getline(ss, dari, '|');
         getline(ss, ke, '|');
         getline(ss, isi);
-
+        
         if (ke == usernames[akunAktif]) {
             if (find(pengirimUnik.begin(), pengirimUnik.end(), dari) == pengirimUnik.end()) {
                 pengirimUnik.push_back(dari);
@@ -124,30 +130,35 @@ void tampilkanPesanMasuk() {
         }
     }
     fileIn.close();
-
+    
     if (pengirimUnik.empty()) {
-        cout << "[!] Tidak ada pesan masuk." << endl;
+        cout << "|  Tidak ada pesan masuk.  |" << endl;
+        cout << "============================\n";
         return;
     }
-
+    
     for (int i = 0; i < pengirimUnik.size(); ++i) {
-        cout << i + 1 << ". " << pengirimUnik[i] << endl;
+        cout << "| " << i + 1 << ". " << pengirimUnik[i] << endl;
     }
-
+    
     int pilihan;
-    cout << "Pilih pengirim (nomor): ";
+    cout << "|==========================|\n";
+    cout << "| Pilih pengirim (nomor): ";
     cin >> pilihan;
     cin.ignore();
-
+    cout << "|==========================|\n";
+    
     if (pilihan < 1 || pilihan > pengirimUnik.size()) {
-        cout << "[!] Pilihan tidak valid." << endl;
+        cout << "|    Pilihan tidak valid.  |" << endl;
         return;
     }
-
+    
     string targetPengirim = pengirimUnik[pilihan - 1];
-
-    cout << "\n=== PESAN DARI " << targetPengirim << " ===" << endl;
+    
+    cout << "| Pesan Dari - " << targetPengirim;
+    cout << "\n|==========================|";
     fileIn.open("pesan.txt");
+    int i = 1;
     int count = 0;
     while (getline(fileIn, line)) {
         stringstream ss(line);
@@ -155,15 +166,17 @@ void tampilkanPesanMasuk() {
         getline(ss, dari, '|');
         getline(ss, ke, '|');
         getline(ss, isi);
-
+        
         if (ke == usernames[akunAktif] && dari == targetPengirim) {
-            cout << "- " << isi << endl;
+            cout << "\n| "  <<  i << ". "<< isi << endl;
+            i++;
             count++;
         }
     }
     fileIn.close();
-
+    
     if (count == 0) {
-        cout << "[!] Tidak ada pesan dari pengirim tersebut." << endl;
+        cout << "Tidak ada pesan dari pengirim tersebut." << endl;
     }
+    cout << "============================";
 }

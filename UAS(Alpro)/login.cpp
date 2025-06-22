@@ -49,7 +49,10 @@ void Start() {
             case 1: inputlogin(); break;
             case 2: buatAkun(); break;
             case 3:
-                cout << "\n Terima kasih telah menggunakan aplikasi ini!\n";
+                cout << "\n==================================================\n";
+                cout << "|  Terima kasih telah menggunakan aplikasi ini!  |\n";
+                cout << "==================================================\n";
+                cout << "\n \n";
                 break;
             default:
                 cout << "\n Pilihan tidak valid. Ulangi.\n";
@@ -95,11 +98,12 @@ void inputlogin() {
 
     cout << "\n==============================\n";
     cout << "|         LOGIN USER         |\n";
-    cout << "==============================\n";
-    cout << "Username : ";
+    cout << "|============================|\n";
+    cout << "| Username : ";
     cin >> inputNama;
-    cout << "Sandi    : ";
+    cout << "| Sandi    : ";
     inputSandi = inputSandiDenganBintang();
+    cout << "==============================\n";
     
     for (int j = 0; j < akunTerdaftar; j++) {
         if (usernames[j] == inputNama && sandi[j] == inputSandi) {
