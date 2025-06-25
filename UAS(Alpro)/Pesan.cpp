@@ -32,7 +32,7 @@ void showMenuPesan() {
             case 3:
                 return;
             default:
-                cout << "[!] Pilihan tidak valid." << endl;
+                cout << "\nPilihan tidak valid." << endl;
         }
     } while (pilihan != 3);
 }
@@ -73,7 +73,7 @@ void kirimPesan() {
     cout << "|=======================================|\n";
     
     if (pilihan < 1 || pilihan > daftarKontak.size()) {
-        cout << "[!] Pilihan tidak valid.\n";
+        cout << "\nPilihan tidak valid.\n";
         return;
     }
     

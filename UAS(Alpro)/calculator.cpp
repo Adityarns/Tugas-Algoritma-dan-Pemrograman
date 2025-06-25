@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
+#include "global.hpp"
 using namespace std;
 
 void showMenuKalkulator();
-void showMenuKalkulatorSederhana();    
+void showMenuKalkulatorSederhana();
 void showMenuKalkulatorSuhu();
 void showMenuKalkulatorRomawi();
 
@@ -22,8 +23,7 @@ void showMenuKalkulator() {
         cout << "| 3. Konversi Suhu           |" << endl;
         cout << "| 4. Kembali                 |" << endl;
         cout << "==============================" << endl;
-        cout << "Pilihan Anda: ";
-        cin >> userInput3;
+        userInput3 = inputInt("Pilihan Anda: ");
 
         switch (userInput3) {
             case 1:
@@ -50,7 +50,7 @@ void showMenuKalkulatorSederhana() {
     do {
         cout << "\n==============================" << endl;
         cout << "|     KALKULATOR BIASA       |" << endl;
-        cout << "==============================" << endl;
+        cout << "|============================|" << endl;
         cout << "| 1. Penjumlahan             |" << endl;
         cout << "| 2. Pengurangan             |" << endl;
         cout << "| 3. Perkalian               |" << endl;
@@ -58,27 +58,37 @@ void showMenuKalkulatorSederhana() {
         cout << "| 5. Sisa Bagi (Modulus)     |" << endl;
         cout << "| 6. Kembali                 |" << endl;
         cout << "==============================" << endl;
-        cout << "Pilihan Anda: ";
-        cin >> userInput3;
+        userInput3 = inputInt("Pilihan Anda: ");
+        
+        if (userInput3 == 6){
+            break;  
+        } 
+        else if(userInput3 < 1 || userInput3 > 6){
+            cout << "\nPilihan tidak valid.\n";
+            break;
+        }
 
-        if (userInput3 == 6) break;
 
         kalkulatorSederhana(userInput3, hasil);
         if (userInput3 >= 1 && userInput3 <= 5) {
             cout << "==============================" << endl;
-            cout << "Hasil: " << hasil << endl;
+            cout << "|           HASIL            |" << endl;
+            cout << "|============================|" << endl;
+            cout << "| Hasil: " << hasil << endl;
+            cout << "==============================" << endl;
         }
-
+    
+        
     } while (userInput3 != 6);
 }
 
 void kalkulatorSederhana(int userInput3, double& hasil) {
     int angka1, angka2;
-
-    cout << "Masukkan angka pertama: ";
-    cin >> angka1;
-    cout << "Masukkan angka kedua: ";
-    cin >> angka2;
+    
+    cout << "==============================" << endl;
+    angka1 = inputInt("| Masukkan angka pertama: ");
+    cout << "==============================" << endl;
+    angka2 = inputInt("| Masukkan angka kedua: ");
 
     switch (userInput3) {
         case 1:
@@ -92,14 +102,18 @@ void kalkulatorSederhana(int userInput3, double& hasil) {
             break;
         case 4:
             if (angka2 == 0) {
-                cout << "Tidak bisa membagi dengan nol!\n";
+                cout << "==============================" << endl;
+                cout << "| Error: Pembagian dengan 0  |\n";
+                cout << "==============================" << endl;
                 return;
             }
             hasil = static_cast<double>(angka1) / angka2;
             break;
         case 5:
             if (angka2 == 0) {
-                cout << "Tidak bisa menghitung sisa bagi nol!\n";
+                cout << "==============================" << endl;
+                cout << "| Error: Modulo dengan 0     |\n";
+                cout << "==============================" << endl;
                 return;
             }
             hasil = angka1 % angka2;
@@ -116,15 +130,26 @@ void showMenuKalkulatorRomawi() {
     do {
         cout << "\n==============================" << endl;
         cout << "|     KONVERSI ROMAWI        |" << endl;
-        cout << "==============================" << endl;
-        cout << "Masukkan angka (-1 untuk keluar): ";
-        cin >> angka;
+        cout << "|============================|" << endl;
+        cout << "|     -1 untuk keluar        |" << endl;
+        cout << "|============================|" << endl;
+        angka = inputInt("| Masukkan angka : ");
 
         if (angka == -1) break;
         if (angka <= 0) {
-            cout << "Angka harus lebih dari 0.\n";
+            cout << "==============================" << endl;
+            cout << "| Angka harus lebih dari 0   |\n";
+            cout << "==============================" << endl;
         } else {
-            cout << "Romawi: " << konversiRomawi(angka) << endl;
+            string romawi = konversiRomawi(angka);
+            cout << "==============================" << endl;
+            cout << "|      HASIL KONVERSI        |" << endl;
+            cout << "|============================|" << endl;
+            cout << "| Romawi: " << romawi;
+            int sisaSpasi = 28 - (9 + romawi.length());
+            for (int i = 0; i < sisaSpasi; ++i) cout << " ";
+            cout << "|\n";
+            cout << "==============================" << endl;
         }
 
     } while (angka != -1);
@@ -150,34 +175,38 @@ void showMenuKalkulatorSuhu() {
 
     cout << "\n==============================" << endl;
     cout << "|      KONVERSI SUHU         |" << endl;
+    cout << "|============================|" << endl;
+    suhu = inputInt("| Masukkan nilai suhu: ");
     cout << "==============================" << endl;
-    cout << "Masukkan nilai suhu: ";
-    cin >> suhu;
-    cout << "Masukkan satuan (C/F/K): ";
+    cout << "| Masukkan satuan (C/F/K): ";
     cin >> satuan;
 
-    cout << "==============================" << endl;
     konversiSuhu(suhu, satuan);
 }
 
 void konversiSuhu(double suhu, char satuan) {
+    cout << "==============================" << endl;
+    cout << "|      HASIL KONVERSI        |" << endl;
+    cout << "==============================" << endl;
     switch (satuan) {
         case 'C': case 'c':
-            cout << "Celsius     : " << suhu << " \u00B0C" << endl;
-            cout << "Fahrenheit  : " << (suhu * 9/5) + 32 << " \u00B0F" << endl;
-            cout << "Kelvin      : " << suhu + 273.15 << " K" << endl;
+            cout << "| Celsius     : " << suhu << " C" << endl;
+            cout << "| Fahrenheit  : " << (suhu * 9/5) + 32 << " F" << endl;
+            cout << "| Kelvin      : " << suhu + 273.15 << " K" << endl;
             break;
         case 'F': case 'f':
-            cout << "Fahrenheit  : " << suhu << " \u00B0F" << endl;
-            cout << "Celsius     : " << (suhu - 32) * 5/9 << " \u00B0C" << endl;
-            cout << "Kelvin      : " << ((suhu - 32) * 5/9) + 273.15 << " K" << endl;
+            cout << "| Fahrenheit  : " << suhu << " F" << endl;
+            cout << "| Celsius     : " << (suhu - 32) * 5/9 << " C" << endl;
+            cout << "| Kelvin      : " << ((suhu - 32) * 5/9) + 273.15 << " K" << endl;
             break;
         case 'K': case 'k':
-            cout << "Kelvin      : " << suhu << " K" << endl;
-            cout << "Celsius     : " << suhu - 273.15 << " \u00B0C" << endl;
-            cout << "Fahrenheit  : " << ((suhu - 273.15) * 9/5) + 32 << " \u00B0F" << endl;
+            cout << "| Kelvin      : " << suhu << " K" << endl;
+            cout << "| Celsius     : " << suhu - 273.15 << " C" << endl;
+            cout << "| Fahrenheit  : " << ((suhu - 273.15) * 9/5) + 32 << " F" << endl;
             break;
         default:
-            cout << "Satuan tidak dikenali. Gunakan C, F, atau K." << endl;
+            cout << "| Satuan tidak dikenali       |" << endl;
+            cout << "| Gunakan C, F, atau K.       |" << endl;
     }
+    cout << "==============================" << endl;
 }

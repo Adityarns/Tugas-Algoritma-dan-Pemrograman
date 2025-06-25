@@ -11,14 +11,18 @@ void showMenuPulsa() {
 
     do {
         if (dataPulsa[akunAktif].nomorHp.empty() || dataPulsa[akunAktif].nomorHp == "-") {
-            cout << "\n[!] Nomor HP belum terdaftar pada akun Anda.\n";
-            cout << "Silakan masukkan nomor HP Anda terlebih dahulu: ";
+            cout << "\n==================================================" << endl;
+            cout << "| Nomor HP belum terdaftar pada akun Anda.       |\n";
+            cout << "| Silakan masukkan nomor HP Anda terlebih dahulu |\n ";
+            cout << "==================================================" << endl;
             string nomorBaru;
             cin >> nomorBaru;
-
+            
             dataPulsa[akunAktif].nomorHp = nomorBaru;
             simpanDataAkun();
-            cout << "[✓] Nomor HP berhasil ditambahkan.\n";
+            cout << "\n==================================\n" << endl;
+            cout << "| Nomor HP berhasil ditambahkan. |\n";
+            cout << "==================================\n" << endl;
         }
 
         cout << "\n==============================" << endl;
@@ -67,16 +71,18 @@ void showMenuPulsa() {
                     break;
                 }
                 
-                cout << "==============================" << endl;
-                int pilihan = inputInt("Masukkan nomor tujuan: ");                
+                cout << "|============================|" << endl;
+                int pilihan = inputInt("| Masukkan nomor tujuan: ");                
+                cout << "|============================|" << endl;
                 
                 if (pilihan < 1 || pilihan > mapping.size()) {
                     cout << "Pilihan tidak valid.\n";
                     break;
                 }
-
+                
                 int indeksTujuan = mapping[pilihan - 1];
                 dataPulsa[akunAktif].transfer = inputInt("Jumlah transfer: Rp. ");
+                cout << "|============================|" << endl;
                 
                 if (dataPulsa[akunAktif].transfer > dataPulsa[akunAktif].saldo) {
                     cout << "Saldo tidak cukup.\n";
@@ -84,6 +90,7 @@ void showMenuPulsa() {
                     dataPulsa[akunAktif].saldo -= dataPulsa[akunAktif].transfer;
                     dataPulsa[indeksTujuan].saldo += dataPulsa[akunAktif].transfer;
                     cout << "Transfer berhasil ke " << usernames[indeksTujuan] << "!\n";
+                    cout << "==============================" << endl;
                     simpanDataAkun();
                 }
                 break;
@@ -95,9 +102,11 @@ void showMenuPulsa() {
             cout << "|==================================|" << endl;
             cout << "| Saldo Anda: Rp. " << dataPulsa[akunAktif].saldo << endl;
             cout << "|==================================|" << endl;
-                dataPulsa[akunAktif].topUp = inputInt("Masukkan jumlah Top Up: Rp. ");
-                dataPulsa[akunAktif].saldo += dataPulsa[akunAktif].topUp;
-                cout << "Top up berhasil.\n";
+            dataPulsa[akunAktif].topUp = inputInt("| Masukkan jumlah Top Up: Rp. ");
+            cout << "|==================================|" << endl;
+            dataPulsa[akunAktif].saldo += dataPulsa[akunAktif].topUp;
+            cout << "|         Top up berhasil.         |\n";
+            cout << "====================================" << endl;
                 simpanDataAkun();
                 break;
 
